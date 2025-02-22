@@ -3,6 +3,9 @@ const cors = require('cors');
 const initialize = require('./database/initialize');
 require('dotenv').config();
 
+const routesV1 = require('./routes/v1/index');
+const routesV2 = require('./routes/v2/index');
+
 // initialize the express app
 const app = express();
 app.use(cors());
@@ -14,6 +17,10 @@ const initialization = async () => {
   await initialize.createTables();
 };
 initialization();
+
+// setup routing paths
+app.use('/api/v1', routesV1);
+app.use('/api/v2', routesV2);
 
 // start the server
 const ENV = process.env.ENV || 'development';
