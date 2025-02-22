@@ -15,8 +15,8 @@ module.exports = {
   // response payload messages
   RESPONSE: {
     USER: {
-      CREATED: 'User registered successfully!',
       EXISTS: 'User already registered!',
+      INVALID_CRED: 'Invalid user credentials!',
     },
   },
 
