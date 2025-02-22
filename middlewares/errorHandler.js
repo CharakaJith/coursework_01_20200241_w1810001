@@ -9,8 +9,8 @@ const errorHandler = (err, req, res, next) => {
 
   res.status(httpCode).json({
     success: false,
-    data: {
-      statusCode: httpCode,
+    response: {
+      status: httpCode,
       message: message,
       stack: process.env.NODE_ENV === APP_ENV.DEV ? stack : undefined,
     },
