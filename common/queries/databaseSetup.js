@@ -6,7 +6,7 @@ module.exports = {
         last_name TEXT NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL, 
-        isActive BOOL DEFAULT TRUE,
+        is_active BOOL DEFAULT TRUE,
         
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP

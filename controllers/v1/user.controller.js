@@ -25,7 +25,21 @@ const userController = {
       const user = ({ email, password } = req.body);
 
       const response = await userService.userLogin(user);
-      const { success, status, data } = response;
+      const { success, status, data, accessToken, refreshToken } = response;
+
+      // set access token
+      res.set({
+        'Access-Token': accessToken,
+      });
+
+      // set refresh token in a http-only cookie
+      const isSecure = process.env.NODE_ENV === 'development' ? false : true;
+      res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: isSecure,
+        sameSite: 'Strict',
+        path: '/',
+      });
 
       res.status(status).json({
         success: success,

@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt');
 const logger = require('../../middlewares/log/logger');
 const CustomError = require('../../util/customError');
-const field_validator = require('../../util/field_validator');
 const userDao = require('../../repositories/v1/user.dao');
+const jwtService = require('../jwt.service');
+const field_validator = require('../../util/field_validator');
 const { LOG_TYPE } = require('../../constants/logger.constants');
 const { STATUS_CODE } = require('../../constants/app.constants');
 const { RESPONSE } = require('../../common/messages');
@@ -93,12 +94,30 @@ const userService = {
     }
     delete user.password;
 
+    // check if user is active
+    if (!user.is_active) {
+      throw new CustomError(RESPONSE.USER.INACTIVE, STATUS_CODE.FORBIDDON);
+    }
+
+    // generate access token and refresh token
+    const tokenUser = {
+      id: user.user_id,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      email: user.email,
+      isActive: user.is_active,
+    };
+    const accessToken = await jwtService.generateAccessToken(tokenUser);
+    const refreshToken = await jwtService.generateRefreshToken(tokenUser);
+
     return {
       success: true,
       status: STATUS_CODE.CREATED,
       data: {
         user: user,
       },
+      accessToken: accessToken,
+      refreshToken: refreshToken,
     };
   },
 };

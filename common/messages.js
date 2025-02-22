@@ -17,6 +17,7 @@ module.exports = {
     USER: {
       EXISTS: 'User already registered!',
       INVALID_CRED: 'Invalid user credentials!',
+      INACTIVE: 'User is not active!',
     },
   },
 
@@ -36,6 +37,17 @@ module.exports = {
         BY_ID: (entity, error) => `Failed to get ${entity} by id: ${error.message}`,
         BY_EMAIL: (entity, error) => `Failed to get ${entity} by email: ${error.message}`,
       },
+    },
+  },
+
+  // jwt service messages
+  JWT: {
+    GENERATE: {
+      FAILED: (token, error) => `Failed to generate ${token} token: ${error.message}`,
+    },
+    REFRESH: {
+      SUCCESS: 'JWT refreshed!',
+      FAILED: (error) => `Failed to refresh access token: ${error.message}`,
     },
   },
 };
