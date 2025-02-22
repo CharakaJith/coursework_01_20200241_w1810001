@@ -1,0 +1,20 @@
+{
+  "name": "coursework_01_20200241_w1810001",
+  "version": "1.0.0",
+  "description": "coursework 01 for advanced server-side web programming",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Charaka Gunasinghe 20200241/w1810001",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
