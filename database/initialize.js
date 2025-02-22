@@ -2,7 +2,7 @@ const { query } = require('express');
 const db = require('./connection');
 const { DATABASE } = require('../common/messages');
 const { QUERIES } = require('../common/queries/databaseSetup');
-const { TABLES } = require('../constants/tables');
+const { TABLES } = require('../constants/table.constants');
 require('dotenv').config();
 
 const initialize = {

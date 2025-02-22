@@ -1,5 +1,5 @@
 const loggerIndex = require('./index');
-const { LOG_TYPE } = require('../../constants/log');
+const { LOG_TYPE } = require('../../constants/logger.constants');
 
 const logger = (logType, resStatus, statusCode, message, req = {}, stack) => {
   const logBody = {

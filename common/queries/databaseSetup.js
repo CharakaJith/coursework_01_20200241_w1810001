@@ -2,9 +2,12 @@ module.exports = {
   QUERIES: {
     CREATE_USERS: `CREATE TABLE IF NOT EXISTS users (
         user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT UNIQUE NOT NULL,
+        first_name TEXT UNIQUE NOT NULL,
+        last_name TEXT UNIQUE NOT NULL,
         email TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL, -- Hashed password
+        password TEXT NOT NULL, 
+        isActive INTEGER DEFAULT 1,
+        
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );`,
@@ -15,6 +18,7 @@ module.exports = {
         api_key TEXT UNIQUE NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         expires_at DATETIME NULL,
+        
         status TEXT DEFAULT 'active' CHECK(status IN ('active', 'revoked')),
         FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
     );`,
@@ -25,6 +29,7 @@ module.exports = {
         endpoint TEXT NOT NULL,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         status_code INTEGER NOT NULL,
+
         FOREIGN KEY (key_id) REFERENCES api_keys(key_id) ON DELETE CASCADE
     );`,
 

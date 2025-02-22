@@ -37,6 +37,8 @@ const field_validator = {
         message: VALIDATE.PARAM.EMPTY('email'),
       };
     }
+
+    return 1;
   },
 };
 
