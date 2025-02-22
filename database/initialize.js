@@ -1,33 +1,13 @@
 const { query } = require('express');
 const db = require('./connection');
 const { DATABASE } = require('../common/messages');
-const { QUERIES } = require('../common/queries/databaseSetup');
-const { TABLES } = require('../constants/table.constants');
+const { SETUP_QUERIES } = require('../common/queries/setup.queries');
 require('dotenv').config();
 
 const initialize = {
   createTables: async () => {
-    const tables = [
-      {
-        table: TABLES.USERS,
-        query: QUERIES.CREATE_USERS,
-      },
-      {
-        table: TABLES.KEYS,
-        query: QUERIES.CREATE_API_KEYS,
-      },
-      {
-        table: TABLES.REQUESTS,
-        query: QUERIES.CREATE_API_REQUESTS,
-      },
-      {
-        table: TABLES.COUNTRIES,
-        query: QUERIES.CREATE_COUNTRIES,
-      },
-    ];
-
     // create tables
-    for (const { table, query } of tables) {
+    for (const { table, query } of SETUP_QUERIES) {
       await new Promise((resolve, reject) => {
         db.run(query, (error) => {
           if (error) {

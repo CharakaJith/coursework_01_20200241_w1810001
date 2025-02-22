@@ -1,4 +1,5 @@
 const userService = require('../../services/v1/user.service');
+const { APP_ENV } = require('../../constants/app.constants');
 
 const userController = {
   signup: async (req, res, next) => {
@@ -33,7 +34,7 @@ const userController = {
       });
 
       // set refresh token in a http-only cookie
-      const isSecure = process.env.NODE_ENV === 'development' ? false : true;
+      const isSecure = process.env.NODE_ENV === APP_ENV.DEV ? false : true;
       res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
         secure: isSecure,

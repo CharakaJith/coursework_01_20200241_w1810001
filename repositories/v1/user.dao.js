@@ -1,7 +1,7 @@
 const db = require('../../database/connection');
 const CustomError = require('../../util/customError');
 const { DAO } = require('../../common/messages');
-const { USER_QUERIES } = require('../../common/queries/userTable');
+const { USER_QUERIES } = require('../../common/queries/user.queries');
 const { STATUS_CODE } = require('../../constants/app.constants');
 
 const userDao = {
