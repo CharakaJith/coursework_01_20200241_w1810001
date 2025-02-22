@@ -33,8 +33,8 @@ const field_validator = {
 
     if (!email.match(emailformat)) {
       return {
-        fields: param,
-        message: VALIDATE.PARAM.EMPTY('email'),
+        fields: 'email',
+        message: VALIDATE.PARAM.INVALID('email'),
       };
     }
 
