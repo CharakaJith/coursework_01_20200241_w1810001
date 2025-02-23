@@ -45,6 +45,20 @@ const countryDao = {
       throw new CustomError(DAO.FAILED.DELETE(ENTITY.COUNTRY, error), STATUS_CODE.SERVER_ERROR);
     }
   },
+
+  deleteByDate: async (date) => {
+    try {
+      await models.Country.destroy({
+        where: {
+          createdAt: {
+            [Op.lt]: date,
+          },
+        },
+      });
+    } catch (error) {
+      throw new CustomError(DAO.FAILED.DELETE(ENTITY.COUNTRY, error), STATUS_CODE.SERVER_ERROR);
+    }
+  },
 };
 
 module.exports = countryDao;

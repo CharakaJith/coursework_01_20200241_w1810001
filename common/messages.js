@@ -52,4 +52,10 @@ module.exports = {
       FORBIDDEN: 'Permission denied!',
     },
   },
+
+  // cron job messages
+  CRON: {
+    SUCCESS: 'Cron job ran successfully!',
+    FAILED: (error) => `Failed to run cron job: ${error.message}`,
+  },
 };

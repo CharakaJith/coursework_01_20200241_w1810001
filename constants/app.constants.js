@@ -30,5 +30,6 @@ module.exports = {
 
   CACHE: Object.freeze({
     DURATION_HOURS: 24,
+    DURATION_DAYS: 2,
   }),
 };
