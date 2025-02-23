@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const errorHandler = require('./middlewares/errorHandler');
 const initialize = require('./database/initialize');
+const errorHandler = require('./middlewares/errorHandler');
 require('dotenv').config();
 
 const routesV1 = require('./routes/v1/index');
@@ -14,8 +14,7 @@ app.use(express.json());
 
 // initialize database
 const initialization = async () => {
-  // create tables
-  await initialize.createTables();
+  await initialize();
 };
 initialization();
 

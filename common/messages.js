@@ -1,14 +1,9 @@
 module.exports = {
-  // database connection and initialization messages
+  // database initialization messages
   DATABASE: {
-    CONNECTION: {
-      SUCCESS: 'Connected to the database successfully!',
-      FAILED: (error) => `Failed to connect to the database: ${error.message}`,
-    },
-
-    TABLE: {
-      CREATED: (table) => `Table '${table}' created successfully or already exists!`,
-      FAILED: (table, error) => `Failed to create database table '${table}': ${error.message}`,
+    SYNC: {
+      SUCCESS: 'Database synced!',
+      FAILED: (error) => `Failed to sync database: ${error.message}`,
     },
   },
 
@@ -52,6 +47,13 @@ module.exports = {
     AUTH: {
       FAILED: 'Authentication failed!',
       FORBIDDEN: 'Permission denied!',
+    },
+  },
+
+  // res country service messages
+  COUNTRY: {
+    FAILED: {
+      FETCH: '',
     },
   },
 };
