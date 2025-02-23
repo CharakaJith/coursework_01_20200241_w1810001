@@ -49,5 +49,9 @@ module.exports = {
       SUCCESS: 'JWT refreshed!',
       FAILED: (error) => `Failed to refresh access token: ${error.message}`,
     },
+    AUTH: {
+      FAILED: 'Authentication failed!',
+      FORBIDDEN: 'Permission denied!',
+    },
   },
 };
