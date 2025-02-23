@@ -1,47 +1,38 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Country extends Model {
+  class Currency extends Model {
     static associate(models) {
-      // single country have a single currency
-      Country.belongsTo(models.Currency, {
+      // single currency can be used by many countries
+      Currency.hasMany(models.Country, {
         foreignKey: 'currencyId',
-        as: 'currency',
+        as: 'countries',
         onDelete: 'CASCADE',
       });
     }
   }
 
-  Country.init(
+  Currency.init(
     {
-      officialName: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      commonName: {
+      code: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      capital: {
+      symbol: {
         type: DataTypes.STRING,
-      },
-      currencyId: {
-        type: DataTypes.INTEGER,
         allowNull: false,
-      },
-      languages: {
-        type: DataTypes.JSON,
-      },
-      flagUrl: {
-        type: DataTypes.STRING,
       },
     },
     {
       sequelize,
-      modelName: 'Country',
+      modelName: 'Currency',
       underscored: true,
     }
   );
 
-  return Country;
+  return Currency;
 };
