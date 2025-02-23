@@ -1,6 +1,6 @@
 module.exports = {
-  TABLES: Object.freeze({
-    USERS: 'users',
+  ENTITY: Object.freeze({
+    USER: 'user',
     KEYS: 'api_keys',
     REQUESTS: 'api_requests',
     COUNTRIES: 'countries',

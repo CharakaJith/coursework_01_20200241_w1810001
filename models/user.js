@@ -10,9 +10,10 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       // single user can make many requests
-      User.hasMany(models.ApiRequest, {
+      User.belongsToMany(models.ApiRequest, {
         through: models.ApiKey,
         foreignKey: 'userId',
+        otherKey: 'keyId',
         as: 'apiRequests',
       });
     }

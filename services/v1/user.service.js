@@ -50,7 +50,7 @@ const userService = {
     const newUser = await userDao.insert(userDetails);
 
     // remove password
-    delete newUser.password;
+    delete newUser.dataValues.password;
 
     return {
       success: true,
@@ -92,20 +92,20 @@ const userService = {
     if (!isValidPassword) {
       throw new CustomError(PAYLOAD.USER.INVALID_CRED, STATUS_CODE.UNAUTHORIZED);
     }
-    delete user.password;
+    delete user.dataValues.password;
 
     // check if user is active
-    if (!user.is_active) {
+    if (!user.isActive) {
       throw new CustomError(RESPONSE.USER.INACTIVE, STATUS_CODE.FORBIDDON);
     }
 
     // generate access token and refresh token
     const tokenUser = {
-      id: user.user_id,
-      firstName: user.first_name,
-      lastName: user.last_name,
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
-      isActive: user.is_active,
+      isActive: user.isActive,
     };
     const accessToken = await jwtService.generateAccessToken(tokenUser);
     const refreshToken = await jwtService.generateRefreshToken(tokenUser);

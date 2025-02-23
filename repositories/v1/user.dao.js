@@ -1,43 +1,36 @@
-const db = require('../../database/connection');
+const models = require('../../models');
 const CustomError = require('../../util/customError');
 const { DAO } = require('../../common/messages');
-const { USER_QUERIES } = require('../../common/queries/user.queries');
 const { STATUS_CODE } = require('../../constants/app.constants');
+const { ENTITY } = require('../../constants/entity.constants');
 
 const userDao = {
   insert: async (user) => {
-    return new Promise((resolve, reject) => {
-      const values = [user.firstName, user.lastName, user.email, user.password];
-
-      db.run(USER_QUERIES.INSERT, values, function (error) {
-        if (error) return reject(new CustomError(DAO.FAILED.INSERT('users', error), STATUS_CODE.SERVER_ERROR));
-
-        return userDao
-          .getById(this.lastID)
-          .then((user) => resolve(user))
-          .catch((error) => reject(error));
-      });
-    });
+    try {
+      return await models.User.create(user);
+    } catch (error) {
+      throw new CustomError(DAO.FAILED.INSERT(ENTITY.USER, error.message), STATUS_CODE.SERVER_ERROR);
+    }
   },
 
   getById: async (userId) => {
-    return new Promise((resolve, reject) => {
-      db.get(USER_QUERIES.GET_BY_ID, [userId], function (error, row) {
-        if (error) return reject(new CustomError(DAO.FAILED.GET.BY_ID('users', error), STATUS_CODE.SERVER_ERROR));
-
-        return resolve(row);
-      });
-    });
+    try {
+      return await models.User.findByPk(userId);
+    } catch (error) {
+      throw new CustomError(DAO.FAILED.GET.BY_ID(ENTITY.USER, error.message), STATUS_CODE.SERVER_ERROR);
+    }
   },
 
   getByEmail: async (userEmail) => {
-    return new Promise((resolve, reject) => {
-      db.get(USER_QUERIES.GET_BY_EMAIL, [userEmail], function (error, row) {
-        if (error) return reject(new CustomError(DAO.FAILED.GET.BY_EMAIL('users', error), STATUS_CODE.SERVER_ERROR));
-
-        return resolve(row);
+    try {
+      return await models.User.findOne({
+        where: {
+          email: userEmail,
+        },
       });
-    });
+    } catch (error) {
+      throw new CustomError(DAO.FAILED.GET.BY_EMAIL(ENTITY.USER, error.message), STATUS_CODE.SERVER_ERROR);
+    }
   },
 };
 
