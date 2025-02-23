@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const logger = require('../log/logger');
 const { STATUS_CODE } = require('../../constants/app.constants');
 const { JWT } = require('../../common/messages');
+const { LOG_TYPE } = require('../../constants/logger.constants');
 
 const authenticate = async (req, res, next) => {
   try {
@@ -13,15 +14,17 @@ const authenticate = async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(STATUS_CODE.UNAUTHORIZED).json({
+    const statusCode = STATUS_CODE.UNAUTHORIZED;
+
+    res.status(statusCode).json({
       success: false,
       response: {
-        status: STATUS_CODE.UNAUTHORIZED,
+        status: statusCode,
         data: JWT.AUTH.FAILED,
       },
     });
 
-    logger(LOG_TYPE.ERROR, false, STATUS_CODE.UNAUTHORIZED, `${error.message}`, req);
+    logger(LOG_TYPE.ERROR, false, statusCode, `${error.message}`, req);
   }
 };
 
