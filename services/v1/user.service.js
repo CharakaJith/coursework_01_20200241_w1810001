@@ -112,7 +112,7 @@ const userService = {
 
     return {
       success: true,
-      status: STATUS_CODE.CREATED,
+      status: STATUS_CODE.OK,
       data: {
         user: user,
       },

@@ -27,4 +27,8 @@ module.exports = {
     NOTFOUND: 'ENOTFOUND',
     REFUSED: 'ECONNREFUSED',
   }),
+
+  CACHE: Object.freeze({
+    DURATION_HOURS: 24,
+  }),
 };

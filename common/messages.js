@@ -28,9 +28,12 @@ module.exports = {
   DAO: {
     FAILED: {
       INSERT: (entity, error) => `Failed to create new ${entity}: ${error.message}`,
+      DELETE: (entity, error) => `Failed to destroy ${entity}: ${error.message}`,
       GET: {
         BY_ID: (entity, error) => `Failed to get ${entity} by id: ${error.message}`,
         BY_EMAIL: (entity, error) => `Failed to get ${entity} by email: ${error.message}`,
+        BY_CODE: (entity, error) => `Failed to get ${entity} by code: ${error.message}`,
+        RECENT: (entity, error) => `Failed to get recent ${entity}: ${error}`,
       },
     },
   },
@@ -47,13 +50,6 @@ module.exports = {
     AUTH: {
       FAILED: 'Authentication failed!',
       FORBIDDEN: 'Permission denied!',
-    },
-  },
-
-  // res country service messages
-  COUNTRY: {
-    FAILED: {
-      FETCH: '',
     },
   },
 };

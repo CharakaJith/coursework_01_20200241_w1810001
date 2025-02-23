@@ -9,7 +9,7 @@ const userDao = {
     try {
       return await models.User.create(user);
     } catch (error) {
-      throw new CustomError(DAO.FAILED.INSERT(ENTITY.USER, error.message), STATUS_CODE.SERVER_ERROR);
+      throw new CustomError(DAO.FAILED.INSERT(ENTITY.USER, error), STATUS_CODE.SERVER_ERROR);
     }
   },
 
@@ -17,7 +17,7 @@ const userDao = {
     try {
       return await models.User.findByPk(userId);
     } catch (error) {
-      throw new CustomError(DAO.FAILED.GET.BY_ID(ENTITY.USER, error.message), STATUS_CODE.SERVER_ERROR);
+      throw new CustomError(DAO.FAILED.GET.BY_ID(ENTITY.USER, error), STATUS_CODE.SERVER_ERROR);
     }
   },
 
@@ -29,7 +29,7 @@ const userDao = {
         },
       });
     } catch (error) {
-      throw new CustomError(DAO.FAILED.GET.BY_EMAIL(ENTITY.USER, error.message), STATUS_CODE.SERVER_ERROR);
+      throw new CustomError(DAO.FAILED.GET.BY_EMAIL(ENTITY.USER, error), STATUS_CODE.SERVER_ERROR);
     }
   },
 };

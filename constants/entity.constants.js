@@ -3,6 +3,7 @@ module.exports = {
     USER: 'user',
     KEYS: 'api_keys',
     REQUESTS: 'api_requests',
-    COUNTRIES: 'countries',
+    COUNTRY: 'country',
+    CURRENCY: 'currency',
   }),
 };
