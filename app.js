@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const swagger = require('swagger-ui-express');
 const initialize = require('./database/initialize');
 const errorHandler = require('./middlewares/errorHandler');
+const swaggerDocV1 = require('./docs/v1/swagger.json');
 require('dotenv').config();
 
 const routesV1 = require('./routes/v1/index');
@@ -17,6 +19,9 @@ const initialization = async () => {
   await initialize();
 };
 initialization();
+
+// swagger doc
+app.use('/api-docs', swagger.serve, swagger.setup(swaggerDocV1));
 
 // setup routing paths
 app.use('/api/v1', routesV1);

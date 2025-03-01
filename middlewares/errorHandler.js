@@ -11,7 +11,9 @@ const errorHandler = (err, req, res, next) => {
     success: false,
     response: {
       status: httpCode,
-      message: message,
+      data: {
+        message: message,
+      },
       stack: process.env.NODE_ENV === APP_ENV.DEV ? stack : undefined,
     },
   });

@@ -90,7 +90,7 @@ const userService = {
     // validate password and remove it
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
-      throw new CustomError(PAYLOAD.USER.INVALID_CRED, STATUS_CODE.UNAUTHORIZED);
+      throw new CustomError(RESPONSE.USER.INVALID_CRED, STATUS_CODE.UNAUTHORIZED);
     }
     delete user.dataValues.password;
 

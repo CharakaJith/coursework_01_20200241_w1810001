@@ -26,6 +26,7 @@
     "node-cron": "^3.0.3",
     "sequelize": "^6.37.5",
     "sqlite3": "^5.1.7",
+    "swagger-ui-express": "^5.0.1",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"
   }
