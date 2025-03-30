@@ -10,7 +10,7 @@ const jwtService = {
         expiresIn: '3h',
       });
     } catch (error) {
-      throw new CustomError(JWT.GENERATE.FAILED('access', STATUS_CODE.SERVER_ERROR));
+      throw new CustomError(JWT.GENERATE.FAILED('access', error), STATUS_CODE.SERVER_ERROR);
     }
   },
 

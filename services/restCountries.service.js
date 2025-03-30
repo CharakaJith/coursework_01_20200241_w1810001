@@ -11,7 +11,7 @@ const restCountriesService = {
     } catch (error) {
       const statusCode = getStatusCode(error);
 
-      throw new CustomError(error.message, statusCode);
+      throw new CustomError(`Failed to fetch countries from RC: ${error.message}`, statusCode);
     }
   },
 };
