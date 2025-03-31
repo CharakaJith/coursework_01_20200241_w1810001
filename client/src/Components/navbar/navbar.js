@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
+import Logo from '../../assets/images/logo-full.jpg';
 import './navbar.css';
 
 function Navbar() {
   return (
     <nav className="fixed-navbar">
       <div className="logo">
-        <h1>CountryScope</h1>
+        <Link to="/">
+          <img src={Logo} alt="CountryScope Logo" className="logo-img" />
+        </Link>
       </div>
       <div className="nav-center">
         <ul className="nav-links">
