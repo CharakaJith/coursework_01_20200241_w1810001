@@ -29,7 +29,7 @@ function AboutPage() {
         <br />
         <p>- Charaka Jith Gunasinghe (20200241/w1810001)</p>
         <p>
-          <a href="mailto:charaka.info@gmail.com">- charaka.info@gmail.com</a>
+          <a href="mailto:charaka.20200241@iit.ac.lk">- charaka.20200241@iit.ac.lk</a>
         </p>
       </div>
 

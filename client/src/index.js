@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import favicon from './assets/images/logo-mini.png';
-import backgroundImage from './assets/images/background.jpg';
 
 // dynamically change the favicon
 const changeFavicon = (iconPath) => {
