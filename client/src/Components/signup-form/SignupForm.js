@@ -145,22 +145,18 @@ function SignupForm() {
           <p>First name</p>
           <input value={firstname} onChange={handleFirstnameChange} type="text" placeholder="Enter your first name" />
         </div>
-
         <div className="input-box">
           <p>Last name</p>
           <input value={lastname} onChange={handleLastnameChange} type="text" placeholder="Enter your last name" />
         </div>
-
         <div className="input-box">
           <p>Email</p>
           <input value={email} onChange={handleEmailChange} type="email" placeholder="Enter your email" />
         </div>
-
         <div className="input-box">
           <p>Password</p>
           <input value={password} onChange={handlePasswordChange} type="password" placeholder="Enter your password" />
         </div>
-
         <div className="input-box">
           <p>Confrim password</p>
           <input value={confirmPassword} onChange={handleConfrimPasswordChange} type="password" placeholder="Confrim your password" />
