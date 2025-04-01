@@ -1,5 +1,5 @@
+import './loginForm.css';
 import axios from 'axios';
-import './LoginForm.css';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,6 +18,9 @@ function LoginForm() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    // remove access token
+    localStorage.removeItem('accessToken');
+
     const signupMessage = localStorage.getItem('signupMessage');
     if (signupMessage) {
       setMessage(signupMessage);
@@ -56,7 +59,15 @@ function LoginForm() {
           .post('/api/v1/user/login', body, {})
           .then((res) => {
             if (res.data.success === true) {
-              navigate('/contact');
+              // set access token
+              const accessToken = res.headers['Access-Token'] || res.headers['access-token'];
+              console.log(accessToken);
+
+              if (accessToken) {
+                localStorage.setItem('accessToken', accessToken);
+              }
+
+              navigate('/dashboard');
             }
           })
           .catch((error) => {

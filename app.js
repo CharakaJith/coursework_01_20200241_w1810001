@@ -11,7 +11,13 @@ const routesV2 = require('./routes/v2/index');
 
 // initialize the express app
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Access-Token'],
+  })
+);
 app.use(express.json());
 
 // initialize database

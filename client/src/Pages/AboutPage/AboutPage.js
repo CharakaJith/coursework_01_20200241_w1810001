@@ -1,5 +1,5 @@
 import './AboutPage.css';
-import Footer from '../../components/footer/footer';
+import Footer from '../../components/footer/footer.js';
 import Navbar from '../../components/navbar/navbar';
 
 function AboutPage() {

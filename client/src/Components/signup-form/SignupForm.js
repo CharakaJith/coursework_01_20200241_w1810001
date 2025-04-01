@@ -1,5 +1,5 @@
+import './signupForm.css';
 import axios from 'axios';
-import './SignupForm.css';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,7 +19,10 @@ function SignupForm() {
   const [error, setError] = useState('');
   const [isError, setIsError] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // remove access token
+    localStorage.removeItem('accessToken');
+  }, []);
   const navigate = useNavigate();
 
   // validate form fields

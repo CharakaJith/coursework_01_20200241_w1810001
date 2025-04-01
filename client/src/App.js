@@ -5,6 +5,7 @@ import AboutPage from './Pages/AboutPage/AboutPage';
 import ContactPage from './Pages/ContactPage/ContactPage';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import SignupPage from './Pages/SignupPage/SignupPage';
+import DashboardPage from './Pages/DashboardPage/DashboardPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/contact" element={<ContactPage />} />
         <Route exact path="/login" element={<LoginPage />} />
         <Route exact path="/signup" element={<SignupPage />} />
+        <Route exact path="/dashboard" element={<DashboardPage />} />
       </Routes>
     </BrowserRouter>
   );
