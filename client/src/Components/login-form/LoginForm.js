@@ -12,11 +12,25 @@ const api = axios.create({
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
   const [error, setError] = useState('');
   const [isError, setIsError] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const signupMessage = localStorage.getItem('signupMessage');
+    if (signupMessage) {
+      setMessage(signupMessage);
+      localStorage.removeItem('signupMessage');
+
+      // remove the message after 5 seconds
+      const timer = setTimeout(() => {
+        setMessage('');
+      }, 8000);
+
+      return () => clearTimeout(timer);
+    }
+  }, []);
   const navigate = useNavigate();
 
   // validate form fields
@@ -78,38 +92,43 @@ function LoginForm() {
   };
 
   return (
-    <div className="form-wrapper">
-      {/* log in form */}
-      <form onSubmit={submitForm}>
-        <h1>Log in</h1>
+    <div>
+      <div className="form-wrapper">
+        {/* success message box */}
+        {message && <div className="success-box">{message}</div>}
 
-        <div className="input-box">
-          <p>Email</p>
-          <input value={email} onChange={handleEmailChange} type="email" placeholder="Enter your email" />
-        </div>
-        <div className="input-box">
-          <p>Password</p>
-          <input value={password} onChange={handlePasswordChange} type="password" placeholder="Enter your password" />
-        </div>
+        {/* log in form */}
+        <form onSubmit={submitForm}>
+          <h1>Log in</h1>
 
-        {/* error box */}
-        <>
-          {isError ? (
-            <div className="error-box">
-              <text>{error}</text>
-            </div>
-          ) : (
-            <></>
-          )}
-        </>
+          <div className="input-box">
+            <p>Email</p>
+            <input value={email} onChange={handleEmailChange} type="email" placeholder="Enter your email" />
+          </div>
+          <div className="input-box">
+            <p>Password</p>
+            <input value={password} onChange={handlePasswordChange} type="password" placeholder="Enter your password" />
+          </div>
 
-        {/* log in button */}
-        <div>
-          <button className={`btn ${isError || !isFormValid() ? 'disabled-btn' : ''}`} disabled={isError || !isFormValid()}>
-            Log In
-          </button>
-        </div>
-      </form>
+          {/* error box */}
+          <>
+            {isError ? (
+              <div className="error-box">
+                <text>{error}</text>
+              </div>
+            ) : (
+              <></>
+            )}
+          </>
+
+          {/* log in button */}
+          <div>
+            <button className={`btn ${isError || !isFormValid() ? 'disabled-btn' : ''}`} disabled={isError || !isFormValid()}>
+              Log In
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

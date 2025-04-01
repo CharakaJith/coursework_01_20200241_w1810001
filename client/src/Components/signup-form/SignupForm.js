@@ -58,7 +58,9 @@ function SignupForm() {
           .post('/api/v1/user', body, {})
           .then((res) => {
             if (res.data.success === true) {
-              navigate('/');
+              localStorage.setItem('signupMessage', 'You have signed up successfully. Please log in to continue.');
+
+              navigate('/login');
             } else {
             }
           })
