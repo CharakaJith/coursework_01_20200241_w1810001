@@ -1,6 +1,7 @@
 import axios from 'axios';
 import './SignupForm.css';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -19,6 +20,7 @@ function SignupForm() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {}, []);
+  const navigate = useNavigate();
 
   // validate form fields
   const isFormValid = () => {
@@ -26,7 +28,53 @@ function SignupForm() {
   };
 
   // submit form
-  const submitForm = (event) => {};
+  const submitForm = (event) => {
+    event.preventDefault();
+
+    try {
+      if (
+        !firstname ||
+        firstname.trim().length === 0 ||
+        !lastname ||
+        lastname.trim().length === 0 ||
+        !email ||
+        email.trim().length === 0 ||
+        !password ||
+        password.trim().length === 0 ||
+        !confirmPassword ||
+        confirmPassword.trim().length === 0
+      ) {
+        setError('One or more fields are empty!');
+        setIsError(true);
+      } else {
+        const body = {
+          firstName: firstname,
+          lastName: lastname,
+          email: email,
+          password: password,
+        };
+
+        api
+          .post('/api/v1/user', body, {})
+          .then((res) => {
+            if (res.data.success === true) {
+              navigate('/');
+            } else {
+            }
+          })
+          .catch((error) => {
+            console.error(`Error creating user: ${error.message}`);
+
+            console.log(error);
+
+            if (error.response) {
+              setError(error.response.data.response.data.message);
+              setIsError(true);
+            }
+          });
+      }
+    } catch (error) {}
+  };
 
   // handle first name on change
   const handleFirstnameChange = (event) => {
