@@ -65,8 +65,6 @@ function SignupForm() {
           .catch((error) => {
             console.error(`Error creating user: ${error.message}`);
 
-            console.log(error);
-
             if (error.response) {
               setError(error.response.data.response.data.message);
               setIsError(true);

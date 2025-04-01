@@ -33,6 +33,26 @@ function LoginForm() {
         setError('One or more fields are empty!');
         setIsError(true);
       } else {
+        const body = {
+          email: email,
+          password: password,
+        };
+
+        api
+          .post('/api/v1/user/login', body, {})
+          .then((res) => {
+            if (res.data.success === true) {
+              navigate('/contact');
+            }
+          })
+          .catch((error) => {
+            console.error(`Error loging in user: ${error.message}`);
+
+            if (error.response) {
+              setError(error.response.data.response.data.message);
+              setIsError(true);
+            }
+          });
       }
     } catch (error) {}
   };
