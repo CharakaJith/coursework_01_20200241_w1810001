@@ -139,7 +139,7 @@ function SignupForm() {
   };
 
   return (
-    <div className="form-wrapper">
+    <div className="signup-form-wrapper">
       {/* sign up form */}
       <form onSubmit={submitForm}>
         <h1>Sign up</h1>

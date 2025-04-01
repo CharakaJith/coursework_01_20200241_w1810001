@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Footer from '../../components/footer/footer';
-import Navbar from '../../components/navbar/navbar';
+import SideNavbar from '../../components/side-navbar/sideNavbar';
 
 function DashboardPage() {
   const navigate = useNavigate();
@@ -20,8 +20,7 @@ function DashboardPage() {
 
   return (
     <dev>
-      <Navbar />
-      <h1>huttoo</h1>
+      <SideNavbar />
       <Footer />
     </dev>
   );

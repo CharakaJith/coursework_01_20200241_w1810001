@@ -104,7 +104,7 @@ function LoginForm() {
 
   return (
     <div>
-      <div className="form-wrapper">
+      <div className="login-form-wrapper">
         {/* success message box */}
         {message && <div className="success-box">{message}</div>}
 

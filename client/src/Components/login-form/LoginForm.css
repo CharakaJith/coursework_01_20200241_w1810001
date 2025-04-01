@@ -1,5 +1,5 @@
 /* form wrapper */
-.form-wrapper {
+.login-form-wrapper {
   overflow: auto;
   max-height: 100vh;
   width: 600px;
@@ -13,23 +13,23 @@
 }
 
 /* form wrapper heading */
-.form-wrapper h1 {
-  font-size: 45px;
+.login-form-wrapper h1 {
+  font-size: 30px;
   text-align: center;
   color: black;
 }
 
 /* form wrapper input */
-.form-wrapper .input-box {
+.login-form-wrapper .input-box {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 100%;
   height: 50px;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
-.form-wrapper .input-box p {
+.login-form-wrapper .input-box p {
   white-space: nowrap;
   font-size: 16px;
   font-weight: bold;
@@ -70,7 +70,7 @@
 }
 
 /* form wrapper error box */
-.form-wrapper .error-box {
+.login-form-wrapper .error-box {
   background-color: rgba(178, 34, 34, 0.7);
   color: white;
   padding: 8px;
@@ -93,7 +93,7 @@
 }
 
 /* form wrapper button */
-.form-wrapper .btn {
+.login-form-wrapper .btn {
   margin-top: 10px;
   width: 100%;
   height: 45px;
@@ -108,17 +108,17 @@
   font-weight: 600;
 }
 
-.form-wrapper .btn:hover {
+.login-form-wrapper .btn:hover {
   background: #bbdefb;
 }
 
-.form-wrapper .btn.disabled-btn {
+.login-form-wrapper .btn.disabled-btn {
   background: #e3f2fd;
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.form-wrapper .btn:disabled {
+.login-form-wrapper .btn:disabled {
   background-color: #e3f2fd;
   cursor: not-allowed;
 }
