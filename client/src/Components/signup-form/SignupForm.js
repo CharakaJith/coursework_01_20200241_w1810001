@@ -23,6 +23,7 @@ function SignupForm() {
     // remove access token
     localStorage.removeItem('accessToken');
   }, []);
+
   const navigate = useNavigate();
 
   // validate form fields
