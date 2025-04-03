@@ -29,6 +29,7 @@ const countryDao = {
           },
         ],
         attributes: { exclude: ['currencyId'] },
+        order: [['officialName', 'ASC']],
       });
     } catch (error) {
       throw new CustomError(DAO.FAILED.GET.RECENT(ENTITY.COUNTRY, error), STATUS_CODE.SERVER_ERROR);

@@ -61,10 +61,9 @@ function LoginForm() {
             if (res.data.success === true) {
               // set access token
               const accessToken = res.headers['Access-Token'] || res.headers['access-token'];
-              console.log(accessToken);
-
               if (accessToken) {
                 localStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('user', JSON.stringify(res.data.response.data.user));
               }
 
               navigate('/dashboard');

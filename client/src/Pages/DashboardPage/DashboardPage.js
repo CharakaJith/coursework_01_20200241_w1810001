@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Footer from '../../components/footer/footer';
 import SideNavbar from '../../components/side-navbar/sideNavbar';
+import CountryDisplay from '../../components/country-display/countryDisplay';
 
 function DashboardPage() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ function DashboardPage() {
   return (
     <dev>
       <SideNavbar />
+      <CountryDisplay />
       <Footer />
     </dev>
   );

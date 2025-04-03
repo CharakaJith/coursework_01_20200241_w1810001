@@ -1,8 +1,18 @@
 import './navbar.css';
 import Logo from '../../assets/images/logo-full.jpg';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    const userObject = storedUser ? JSON.parse(storedUser) : null;
+
+    setUser(userObject);
+  }, []);
+
   return (
     <nav className="fixed-navbar">
       <div className="logo">
@@ -21,15 +31,32 @@ function Navbar() {
           <li>
             <Link to="/contact">Contact Us</Link>
           </li>
+          <li>
+            {user ? (
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+            ) : (
+              <></>
+            )}
+          </li>
         </ul>
       </div>
       <div className="auth-links">
-        <Link to="/login" className="login-link">
-          Login
-        </Link>
-        <Link to="/signup" className="signup-link">
-          Sign Up
-        </Link>
+        {user ? (
+          <Link to="/dashboard" className="dashboard-link">
+            {user.firstName} {user.lastName}
+          </Link>
+        ) : (
+          <>
+            <Link to="/login" className="login-link">
+              Login
+            </Link>
+            <Link to="/signup" className="signup-link">
+              Sign Up
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );

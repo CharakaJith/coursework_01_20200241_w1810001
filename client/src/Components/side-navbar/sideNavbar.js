@@ -11,6 +11,7 @@ function SideNavbar() {
   // handle logout
   const handleLogout = (event) => {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('user');
 
     navigate('/');
   };
@@ -31,10 +32,10 @@ function SideNavbar() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/about">Profile</Link>
+            <Link to="/dashboard">Countries</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="/about">Profile</Link>
           </li>
         </ul>
       </div>

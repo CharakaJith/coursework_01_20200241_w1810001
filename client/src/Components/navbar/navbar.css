@@ -55,7 +55,8 @@
 }
 
 .login-link,
-.signup-link {
+.signup-link,
+.dashboard-link {
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
@@ -67,4 +68,8 @@
   color: #0056b3;
   border-bottom: 2px solid #0056b3;
   font-size: 1rem;
+}
+
+.dashboard-link:hover {
+  border-bottom: 2px solid black;
 }

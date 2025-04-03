@@ -25,9 +25,8 @@
   border-radius: 15px;
 }
 
-/* Centers links in the middle of the sidebar */
 .side-navbar .link-container {
-  flex-grow: 1; /* Takes available space between logo and button */
+  flex-grow: 1;
   display: flex;
   align-items: center;
 }
@@ -59,7 +58,6 @@
   color: #f39c12;
 }
 
-/* Makes the button stick to the bottom */
 .side-navbar .btn-container {
   width: 100%;
   padding: 10px;
