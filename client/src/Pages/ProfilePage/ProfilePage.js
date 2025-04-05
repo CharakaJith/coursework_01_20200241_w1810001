@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Footer from '../../components/footer/footer';
 import SideNavbar from '../../components/side-navbar/sideNavbar';
-import CountryDisplay from '../../components/country-display/countryDisplay';
+import Footer from '../../components/footer/footer';
+import ProfileDisplay from '../../components/profile-display/profileDisplay';
 
-function DashboardPage() {
+function ProfilePage() {
   const navigate = useNavigate();
 
   // check the access token
@@ -19,12 +19,12 @@ function DashboardPage() {
   }, [navigate]);
 
   return (
-    <dev>
+    <div>
       <SideNavbar />
-      <CountryDisplay />
+      <ProfileDisplay />
       <Footer />
-    </dev>
+    </div>
   );
 }
 
-export default DashboardPage;
+export default ProfilePage;

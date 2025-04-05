@@ -1,0 +1,53 @@
+/* profile display box */
+.profile-display {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  width: calc(100vw - 250px - 60px);
+  height: calc(100vh - 55px - 60px);
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-left: 250px;
+}
+
+.country-display-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+/* box separator */
+.profile-separator {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  height: 100%;
+}
+
+/* profile boxes */
+.profile-left,
+.profile-right {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  height: 100%;
+}
+
+.profile-left {
+  border-right: 1px solid #ddd;
+  background-color: #f0f0f0;
+}
+
+.profile-right {
+  background-color: #e0e0e0;
+}
+
+.profile-left p,
+.profile-right p {
+  margin: 0;
+}

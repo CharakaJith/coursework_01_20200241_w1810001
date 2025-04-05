@@ -1,3 +1,4 @@
+/* side-navbar display box */
 .side-navbar {
   position: fixed;
   left: 0;
@@ -12,6 +13,7 @@
   padding: 20px 0;
 }
 
+/* side-navbar logo */
 .side-navbar .logo-container {
   width: 100%;
   display: flex;
@@ -25,6 +27,7 @@
   border-radius: 15px;
 }
 
+/* side-navbar links */
 .side-navbar .link-container {
   flex-grow: 1;
   display: flex;
@@ -58,6 +61,7 @@
   color: #f39c12;
 }
 
+/* side-navbar logout button */
 .side-navbar .btn-container {
   width: 100%;
   padding: 10px;

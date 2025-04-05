@@ -1,3 +1,4 @@
+/* country display box */
 .country-display {
   position: fixed;
   top: 30px;
@@ -28,6 +29,7 @@
   margin-bottom: 10px;
 }
 
+/* search bar */
 .search-container {
   display: flex;
   align-items: center;
@@ -44,6 +46,7 @@
   font-size: 1rem;
 }
 
+/* country display table */
 .table-container {
   flex-grow: 1;
   width: 100%;

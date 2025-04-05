@@ -35,7 +35,7 @@ function SideNavbar() {
             <Link to="/dashboard">Countries</Link>
           </li>
           <li>
-            <Link to="/about">Profile</Link>
+            <Link to="/profile">Profile</Link>
           </li>
         </ul>
       </div>

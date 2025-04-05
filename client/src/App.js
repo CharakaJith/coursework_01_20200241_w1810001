@@ -6,6 +6,7 @@ import ContactPage from './Pages/ContactPage/ContactPage';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import SignupPage from './Pages/SignupPage/SignupPage';
 import DashboardPage from './Pages/DashboardPage/DashboardPage';
+import ProfilePage from './Pages/ProfilePage/ProfilePage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/login" element={<LoginPage />} />
         <Route exact path="/signup" element={<SignupPage />} />
         <Route exact path="/dashboard" element={<DashboardPage />} />
+        <Route exact path="/profile" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,3 +1,4 @@
+/* navbar display box */
 .fixed-navbar {
   position: fixed;
   left: 0;
@@ -26,6 +27,7 @@
   justify-content: center;
 }
 
+/* navbar links */
 .nav-links {
   list-style: none;
   display: flex;
