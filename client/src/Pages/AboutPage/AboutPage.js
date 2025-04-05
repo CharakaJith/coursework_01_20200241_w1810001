@@ -1,6 +1,6 @@
 import './AboutPage.css';
-import Footer from '../../components/footer/footer.js';
-import Navbar from '../../components/navbar/navbar';
+import Footer from '../../Components/footer/footer.js';
+import Navbar from '../../Components/navbar/navbar';
 
 function AboutPage() {
   return (

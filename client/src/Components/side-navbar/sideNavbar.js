@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 import logout from '../../assets/icons/logout.png';
+import homeWhite from '../../assets/icons/home-white.png';
+import locationWhite from '../../assets/icons/location-white.png';
+import userWhite from '../../assets/icons/user-white.png';
 
 function SideNavbar() {
   const navigate = useNavigate();
@@ -29,12 +32,15 @@ function SideNavbar() {
       <div className="link-container">
         <ul className="nav-links">
           <li>
+            <img src={homeWhite} alt="Home" className="btn-icon" />
             <Link to="/">Home</Link>
           </li>
           <li>
+            <img src={locationWhite} alt="Country" className="btn-icon" />
             <Link to="/dashboard">Countries</Link>
           </li>
           <li>
+            <img src={userWhite} alt="User" className="btn-icon" />
             <Link to="/profile">Profile</Link>
           </li>
         </ul>

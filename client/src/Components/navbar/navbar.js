@@ -44,7 +44,7 @@ function Navbar() {
       </div>
       <div className="auth-links">
         {user ? (
-          <Link to="/dashboard" className="dashboard-link">
+          <Link to="/profile" className="dashboard-link">
             {user.firstName} {user.lastName}
           </Link>
         ) : (

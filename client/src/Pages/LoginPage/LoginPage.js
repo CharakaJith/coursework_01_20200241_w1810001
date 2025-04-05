@@ -1,7 +1,7 @@
-import Footer from '../../components/footer/footer';
-import Navbar from '../../components/navbar/navbar';
+import Footer from '../../Components/footer/footer';
+import Navbar from '../../Components/navbar/navbar';
 
-import LoginForm from '../../components/login-form/loginForm';
+import LoginForm from '../../Components/login-form/loginForm';
 
 function LoginPage() {
   return (

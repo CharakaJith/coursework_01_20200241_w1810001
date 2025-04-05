@@ -45,7 +45,10 @@
 
 .side-navbar .nav-links li {
   width: 100%;
-  text-align: center;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .side-navbar .nav-links a {
@@ -84,9 +87,17 @@
   background-color: #e67e22;
 }
 
+/* icons */
 .btn-container img {
   width: 20px;
   height: 20px;
   margin-right: 10px;
   margin-top: 2px;
+}
+
+.btn-icon {
+  width: 23px;
+  height: 23px;
+  margin-right: 10px;
+  object-fit: contain;
 }

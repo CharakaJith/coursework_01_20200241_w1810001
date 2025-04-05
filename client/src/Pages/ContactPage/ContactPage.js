@@ -1,6 +1,6 @@
 import './ContactPage.css';
-import Footer from '../../components/footer/footer';
-import Navbar from '../../components/navbar/navbar';
+import Footer from '../../Components/footer/footer';
+import Navbar from '../../Components/navbar/navbar';
 
 import location from '../../assets/icons/location.png';
 import phone from '../../assets/icons/telephone.png';

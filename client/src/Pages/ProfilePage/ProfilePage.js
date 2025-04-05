@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import SideNavbar from '../../components/side-navbar/sideNavbar';
-import Footer from '../../components/footer/footer';
-import ProfileDisplay from '../../components/profile-display/profileDisplay';
+import SideNavbar from '../../Components/side-navbar/sideNavbar';
+import Footer from '../../Components/footer/footer';
+import ProfileDisplay from '../../Components/profile-display/profileDisplay';
 
 function ProfilePage() {
   const navigate = useNavigate();

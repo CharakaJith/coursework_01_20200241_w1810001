@@ -1,7 +1,7 @@
-import Footer from '../../components/footer/footer';
-import Navbar from '../../components/navbar/navbar';
+import Footer from '../../Components/footer/footer';
+import Navbar from '../../Components/navbar/navbar';
 
-import SignupForm from '../../components/signup-form/signupForm';
+import SignupForm from '../../Components/signup-form/signupForm';
 
 function SignupPage() {
   return (
