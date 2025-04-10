@@ -10,16 +10,19 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       // single user can make many requests
-      User.belongsToMany(models.ApiRequest, {
-        through: models.ApiKey,
+      User.hasMany(models.ApiRequest, {
         foreignKey: 'userId',
-        otherKey: 'keyId',
         as: 'apiRequests',
       });
     }
   }
   User.init(
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       firstName: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -46,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'User',
+      tableName: 'Users',
       underscored: true,
     }
   );

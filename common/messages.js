@@ -1,3 +1,5 @@
+const { error } = require('winston');
+
 module.exports = {
   // database initialization messages
   DATABASE: {
@@ -28,12 +30,14 @@ module.exports = {
   DAO: {
     FAILED: {
       INSERT: (entity, error) => `Failed to create new ${entity}: ${error.message}`,
+      UPDATE: (entity, error) => `Failed to update ${entity}: ${error.message}`,
       DELETE: (entity, error) => `Failed to destroy ${entity}: ${error.message}`,
       GET: {
         BY_ID: (entity, error) => `Failed to get ${entity} by id: ${error.message}`,
         BY_EMAIL: (entity, error) => `Failed to get ${entity} by email: ${error.message}`,
         BY_CODE: (entity, error) => `Failed to get ${entity} by code: ${error.message}`,
         RECENT: (entity, error) => `Failed to get recent ${entity}: ${error}`,
+        BY_USER: (entity, error) => `Failed to get ${entity} by user: ${error.message}`,
       },
     },
   },
@@ -51,6 +55,15 @@ module.exports = {
       FAILED: 'Authentication failed!',
       FORBIDDEN: 'Permission denied!',
     },
+  },
+
+  // uuid service messages
+  UUID: {
+    GENERATE: {
+      FAILED: (error) => `Failed to generate uuid: ${error.message}`,
+      TIMEOUT: 'Failed to generate a unique UUID after multiple attempts',
+    },
+    FULL: 'Maximum API key limit reached',
   },
 
   // cron job messages

@@ -3,7 +3,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Country extends Model {
     static associate(models) {
-      // single country have a single currency
+      // single country has a single currency
       Country.belongsTo(models.Currency, {
         foreignKey: 'currencyId',
         as: 'currency',
@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Country',
+      tableName: 'Countries',
       underscored: true,
     }
   );

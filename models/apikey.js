@@ -13,9 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       ApiKey.hasMany(models.ApiRequest, {
         foreignKey: 'keyId',
         as: 'apiRequests',
+        onDelete: 'CASCADE',
       });
     }
   }
+
   ApiKey.init(
     {
       userId: {
@@ -38,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'ApiKey',
+      tableName: 'ApiKeys',
       underscored: true,
     }
   );

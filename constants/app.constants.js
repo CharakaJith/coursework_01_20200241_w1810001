@@ -32,4 +32,16 @@ module.exports = {
     DURATION_HOURS: 24,
     DURATION_DAYS: 2,
   }),
+
+  API_KEY: Object.freeze({
+    STATUS: {
+      ACTIVE: 'ACTIVE',
+      INACTIVE: 'INACTIVE',
+      EXPIRED: 'EXPIRED',
+      REVOKED: 'REVOKED',
+      BLOCKED: 'BLOCKED',
+    },
+
+    MAX_COUNT: 3,
+  }),
 };
