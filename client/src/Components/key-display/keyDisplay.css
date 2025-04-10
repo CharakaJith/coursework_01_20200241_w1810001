@@ -1,0 +1,168 @@
+/* api key display box */
+.key-display {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  width: calc(100vw - 250px - 60px);
+  height: calc(100vh - 55px - 60px);
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 250px;
+  border-radius: 15px;
+  padding: 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* header for the key display */
+.key-display-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.key-display h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* api key instructions box */
+.instruction-box {
+  background-color: #f2efe7;
+  color: #006a71;
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  max-height: calc(100vh - 55px - 60px - 40px);
+  display: inline-block;
+}
+
+.instruction-box p {
+  margin-bottom: 5px;
+}
+
+.instruction-box ul {
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
+
+.instruction-box ul li {
+  margin-bottom: 5px;
+}
+
+.instruction-box strong {
+  color: red;
+}
+
+/* api key management display */
+.key-box {
+  background-color: #9acbd0;
+  color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.key-box .btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #48a6a7;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.key-box .btn:hover {
+  background-color: #006a71;
+}
+
+.key-box .btn:disabled {
+  background-color: #f2efe7;
+  color: black;
+  cursor: not-allowed;
+}
+
+/* generated api key display */
+.generated-api-keys {
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.generated-api-keys ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.generated-api-keys li {
+  margin-top: 10px;
+  color: black;
+}
+
+.api-key-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.api-key-field {
+  flex-grow: 1;
+  padding: 8px;
+  background-color: #f2efe7;
+  border-radius: 5px;
+  word-wrap: break-word;
+}
+
+.revoke-btn {
+  background-color: #d84040;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  width: auto;
+  height: 40px;
+}
+
+.revoke-btn:hover {
+  background-color: #a31d1d;
+}
+
+.copy-btn {
+  background-color: #48a6a7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.copy-btn:hover {
+  background-color: #006a71;
+}
+
+.btn-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  object-fit: contain;
+}

@@ -23,6 +23,7 @@ function CountryDisplay() {
   // fetch countries
   const fetchCountries = () => {
     try {
+      // validate access token
       const accessToken = localStorage.getItem('accessToken');
       if (!accessToken) {
         localStorage.setItem('signupMessage', 'Oops! You must be logged in to proceed.');
@@ -77,8 +78,7 @@ function CountryDisplay() {
   return (
     <div className="country-display">
       <div className="country-display-header">
-        <h1>Countries</h1>
-        <h3>({filteredCountries.length})</h3>
+        <h1>Countries ({filteredCountries.length})</h1>
       </div>
       <div className="search-container">
         <input

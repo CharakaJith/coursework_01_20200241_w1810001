@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import SideNavbar from '../../Components/side-navbar/sideNavbar';
 import Footer from '../../Components/footer/footer';
+import KeyDisplay from '../../Components/key-display/keyDisplay';
 import useAuthRedirect from '../../Hooks/useAuthRedirect';
 
 function ApiKeyPage() {
@@ -24,7 +25,7 @@ function ApiKeyPage() {
   return (
     <div>
       <SideNavbar />
-      <h1>keys</h1>
+      <KeyDisplay />
       <Footer />
     </div>
   );
