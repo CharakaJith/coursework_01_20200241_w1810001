@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import logout from '../../assets/icons/logout.png';
 import homeWhite from '../../assets/icons/home-white.png';
 import locationWhite from '../../assets/icons/location-white.png';
+import keyWhite from '../../assets/icons/key-white.png';
 import userWhite from '../../assets/icons/user-white.png';
 
 function SideNavbar() {
@@ -38,6 +39,10 @@ function SideNavbar() {
           <li>
             <img src={locationWhite} alt="Country" className="btn-icon" />
             <Link to="/dashboard">Countries</Link>
+          </li>
+          <li>
+            <img src={keyWhite} alt="Key" className="btn-icon" />
+            <Link to="/keys">API Keys</Link>
           </li>
           <li>
             <img src={userWhite} alt="User" className="btn-icon" />

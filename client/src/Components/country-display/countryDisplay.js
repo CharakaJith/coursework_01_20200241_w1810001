@@ -78,6 +78,7 @@ function CountryDisplay() {
     <div className="country-display">
       <div className="country-display-header">
         <h1>Countries</h1>
+        <h3>({filteredCountries.length})</h3>
       </div>
       <div className="search-container">
         <input
@@ -86,7 +87,7 @@ function CountryDisplay() {
           placeholder="Search by official name"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={handleKeyPress} // Detect Enter key press
+          onKeyDown={handleKeyPress}
         />
         <button className="search-btn" onClick={handleSearch}>
           Search

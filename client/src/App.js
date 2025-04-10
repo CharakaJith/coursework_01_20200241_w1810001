@@ -7,6 +7,7 @@ import LoginPage from './Pages/LoginPage/LoginPage';
 import SignupPage from './Pages/SignupPage/SignupPage';
 import DashboardPage from './Pages/DashboardPage/DashboardPage';
 import ProfilePage from './Pages/ProfilePage/ProfilePage';
+import ApiKeyPage from './Pages/ApiKeyPage/ApiKeyPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/signup" element={<SignupPage />} />
         <Route exact path="/dashboard" element={<DashboardPage />} />
         <Route exact path="/profile" element={<ProfilePage />} />
+        <Route exact path="/keys" element={<ApiKeyPage />} />
       </Routes>
     </BrowserRouter>
   );

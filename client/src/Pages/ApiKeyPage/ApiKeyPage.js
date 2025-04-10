@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 import SideNavbar from '../../Components/side-navbar/sideNavbar';
 import Footer from '../../Components/footer/footer';
-import ProfileDisplay from '../../Components/profile-display/profileDisplay';
 import useAuthRedirect from '../../Hooks/useAuthRedirect';
 
-function ProfilePage() {
+function ApiKeyPage() {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  //
   useAuthRedirect();
 
   useEffect(() => {
@@ -24,10 +24,10 @@ function ProfilePage() {
   return (
     <div>
       <SideNavbar />
-      <ProfileDisplay />
+      <h1>keys</h1>
       <Footer />
     </div>
   );
 }
 
-export default ProfilePage;
+export default ApiKeyPage;
