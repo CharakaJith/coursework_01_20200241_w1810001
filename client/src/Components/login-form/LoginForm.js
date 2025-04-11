@@ -1,7 +1,7 @@
 import './loginForm.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -136,6 +136,13 @@ function LoginForm() {
             <button className={`btn ${isError || !isFormValid() ? 'disabled-btn' : ''}`} disabled={isError || !isFormValid()}>
               Log In
             </button>
+          </div>
+
+          {/* proceed to signup */}
+          <div className="info-box">
+            <p>
+              New here? <Link to="/signup">Create an account</Link>
+            </p>
           </div>
         </form>
       </div>

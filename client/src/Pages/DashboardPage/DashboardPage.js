@@ -22,11 +22,11 @@ function DashboardPage() {
   if (!isAuthenticated) return null;
 
   return (
-    <dev>
+    <div>
       <SideNavbar />
       <CountryDisplay />
       <Footer />
-    </dev>
+    </div>
   );
 }
 

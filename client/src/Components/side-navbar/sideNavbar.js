@@ -29,7 +29,7 @@ function SideNavbar() {
         </Link>
       </div>
 
-      {/* links */}
+      {/* nav links */}
       <div className="link-container">
         <ul className="nav-links">
           <li>

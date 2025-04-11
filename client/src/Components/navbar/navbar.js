@@ -15,11 +15,14 @@ function Navbar() {
 
   return (
     <nav className="fixed-navbar">
+      {/* logo */}
       <div className="logo">
         <Link to="/">
           <img src={Logo} alt="CountryScope Logo" className="logo-img" />
         </Link>
       </div>
+
+      {/* nav links */}
       <div className="nav-center">
         <ul className="nav-links">
           <li>
@@ -42,6 +45,8 @@ function Navbar() {
           </li>
         </ul>
       </div>
+
+      {/* login and signup */}
       <div className="auth-links">
         {user ? (
           <Link to="/profile" className="dashboard-link">

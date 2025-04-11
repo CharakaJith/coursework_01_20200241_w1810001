@@ -1,7 +1,7 @@
 import './signupForm.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -182,6 +182,13 @@ function SignupForm() {
           <button className={`btn ${isError || !isFormValid() ? 'disabled-btn' : ''}`} disabled={isError || !isFormValid()}>
             Sign Up
           </button>
+        </div>
+
+        {/* proceed to login */}
+        <div className="info-box">
+          <p>
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
         </div>
       </form>
     </div>

@@ -5,11 +5,11 @@ import LoginForm from '../../Components/login-form/loginForm';
 
 function LoginPage() {
   return (
-    <dev>
+    <div>
       <Navbar />
       <LoginForm />
       <Footer />
-    </dev>
+    </div>
   );
 }
 

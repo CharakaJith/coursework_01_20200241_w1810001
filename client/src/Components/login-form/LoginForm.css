@@ -64,6 +64,7 @@
 }
 
 .input-box p {
+  text-align: center;
   white-space: nowrap;
   font-size: 16px;
   font-weight: bold;
@@ -121,4 +122,22 @@
 .login-form-wrapper .btn:disabled {
   background-color: #e3f2fd;
   cursor: not-allowed;
+}
+
+/* proceed to sign up text */
+.info-box {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0;
+  color: #88304e;
+}
+
+.info-box a {
+  color: #88304e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.info-box a:hover {
+  color: #522546;
 }
