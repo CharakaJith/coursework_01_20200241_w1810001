@@ -16,3 +16,16 @@ body {
   background-size: cover;
   background-position: center;
 }
+
+.slogan {
+  text-align: center;
+  font-size: 100px;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+}
+
+.slogan-subtext {
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+}
