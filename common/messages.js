@@ -16,6 +16,13 @@ module.exports = {
       INVALID_CRED: 'Invalid user credentials!',
       INACTIVE: 'User is not active!',
     },
+    KEY: {
+      LIMIT_FULL: 'Maximum API key limit reached!',
+      NOT_FOUND: 'No API keys found!',
+      INVALID_ID: 'Invali API key id!',
+      CANNOT_REVOKE: 'Cannot revoke API key!',
+      REVOKED: 'API key revoked!',
+    },
   },
 
   // validation error messages
@@ -61,9 +68,8 @@ module.exports = {
   UUID: {
     GENERATE: {
       FAILED: (error) => `Failed to generate uuid: ${error.message}`,
-      TIMEOUT: 'Failed to generate a unique UUID after multiple attempts',
+      TIMEOUT: 'Failed to generate a unique UUID after multiple attempts!',
     },
-    FULL: 'Maximum API key limit reached',
   },
 
   // cron job messages

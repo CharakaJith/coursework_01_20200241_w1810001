@@ -6,5 +6,7 @@ const keyRouter = express.Router();
 keyRouter.use(authenticate);
 
 keyRouter.post('/', keyController.generate);
+keyRouter.get('/', keyController.getAll);
+keyRouter.delete('/:id', keyController.revoke);
 
 module.exports = keyRouter;
