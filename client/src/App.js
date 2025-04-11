@@ -8,6 +8,7 @@ import SignupPage from './Pages/SignupPage/SignupPage';
 import DashboardPage from './Pages/DashboardPage/DashboardPage';
 import ProfilePage from './Pages/ProfilePage/ProfilePage';
 import ApiKeyPage from './Pages/ApiKeyPage/ApiKeyPage';
+import EndpointPage from './Pages/EndpointPage/EndpointPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/dashboard" element={<DashboardPage />} />
         <Route exact path="/profile" element={<ProfilePage />} />
         <Route exact path="/keys" element={<ApiKeyPage />} />
+        <Route exact path="/endpoints" element={<EndpointPage />} />
       </Routes>
     </BrowserRouter>
   );

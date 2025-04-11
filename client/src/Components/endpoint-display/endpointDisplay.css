@@ -1,0 +1,150 @@
+/* endpoints display box */
+.endpoint-display {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  width: calc(100vw - 250px - 60px);
+  height: calc(100vh - 55px - 60px);
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 250px;
+  border-radius: 15px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.endpoint-display-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.endpoint-display-header h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* endpoint box */
+.endpoint-box {
+  flex: 1;
+  width: 100%;
+  background-color: #fbfbfb;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+/* endpoint details */
+.side-by-side-boxes {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.box-left {
+  text-align: left;
+  flex: 1;
+  background-color: #fbfbfb;
+  border-radius: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.box-right {
+  text-align: left;
+  flex: 1;
+  background-color: #fbfbfb;
+  border-radius: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.box-left hr {
+  border: 0;
+  border-top: 1px solid #d3d3d3;
+  margin: 5px 0;
+}
+
+/* request box */
+.request-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.request-line {
+  background-color: #4f959d;
+  padding: 10px 15px;
+}
+
+.curl-line {
+  background-color: #98d2c0;
+  padding: 10px 15px;
+}
+
+.request-box h5 {
+  margin: 0;
+  font-size: medium;
+  color: #1b1b1b;
+}
+
+.request-box p {
+  margin: 0;
+  font-size: smaller;
+  color: black;
+  word-break: break-word;
+}
+
+.method {
+  color: #261fb3;
+  font-weight: bold;
+}
+
+/* response box */
+.response-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.response-line {
+  background-color: #210f37;
+  color: white;
+  padding: 10px 15px;
+}
+
+.data-line {
+  background-color: #4f1c51;
+  color: white;
+  padding: 10px 15px;
+}
+
+.response-box h5 {
+  margin: 0;
+  font-size: medium;
+}
+
+.response-box pre {
+  margin: 0;
+  font-size: smaller;
+  word-break: break-word;
+}
