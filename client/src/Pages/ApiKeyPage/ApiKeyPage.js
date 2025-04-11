@@ -10,7 +10,6 @@ function ApiKeyPage() {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  //
   useAuthRedirect();
 
   useEffect(() => {

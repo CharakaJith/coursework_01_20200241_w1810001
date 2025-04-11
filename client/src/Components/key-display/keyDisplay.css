@@ -81,7 +81,7 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  background-color: #48a6a7;
+  background-color: #67ae6e;
   color: black;
   border: none;
   border-radius: 10px;
@@ -91,7 +91,7 @@
 }
 
 .key-box .btn:hover {
-  background-color: #006a71;
+  background-color: #328e6e;
 }
 
 .key-box .btn:disabled {
@@ -130,8 +130,19 @@
   word-wrap: break-word;
 }
 
+.api-key-expiry {
+  background-color: #f8f2de;
+  font-weight: bold;
+  color: #a31d1d;
+  padding: 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+/* api key display buttons */
 .revoke-btn {
   background-color: #d84040;
+  font-weight: bold;
   color: white;
   border: none;
   border-radius: 5px;

@@ -40,9 +40,6 @@ const keyService = {
 
     // get all keys
     const keys = await uuidService.getActiveKeys(id);
-    if (keys.length === 0) {
-      throw new CustomError(RESPONSE.KEY.NOT_FOUND, STATUS_CODE.NOT_FOUND);
-    }
 
     return {
       success: true,

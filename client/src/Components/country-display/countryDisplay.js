@@ -2,6 +2,7 @@ import './countryDisplay.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { USER } from '../../common/messages';
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -26,40 +27,38 @@ function CountryDisplay() {
       // validate access token
       const accessToken = localStorage.getItem('accessToken');
       if (!accessToken) {
-        localStorage.setItem('signupMessage', 'Oops! You must be logged in to proceed.');
+        localStorage.setItem('signupMessage', USER.LOGGED_OUT);
         navigate('/login');
 
         return;
       }
 
-      try {
-        api
-          .get('/api/v1/country', {
-            headers: {
-              Authorization: `"${accessToken}"`,
-            },
-          })
-          .then((res) => {
-            if (res.data.success === true) {
-              setCountries(res.data.response.data.countries);
-              setFilteredCountries(res.data.response.data.countries);
-            }
-          })
-          .catch((error) => {
-            // check if access token expired
-            if (error.response.data.response.status === 401) {
-              localStorage.removeItem('accessToken');
-              localStorage.removeItem('user');
+      api
+        .get('/api/v1/country', {
+          headers: {
+            Authorization: `"${accessToken}"`,
+          },
+        })
+        .then((res) => {
+          if (res.data.success === true) {
+            setCountries(res.data.response.data.countries);
+            setFilteredCountries(res.data.response.data.countries);
+          }
+        })
+        .catch((error) => {
+          console.error(`Error fetching countries: ${error.message}`);
 
-              localStorage.setItem('signupMessage', 'Your session has expired! Please log in to proceed.');
-              navigate('/login');
+          // check if access token expired
+          if (error.response.data.response.status === 401) {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('user');
 
-              return;
-            }
+            localStorage.setItem('signupMessage', USER.SESSION_EXP);
+            navigate('/login');
 
-            console.error(`Error fetching countries: ${error.message}`);
-          });
-      } catch (error) {}
+            return;
+          }
+        });
     } catch (error) {}
   };
 

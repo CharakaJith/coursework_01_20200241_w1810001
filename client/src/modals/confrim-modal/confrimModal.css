@@ -1,0 +1,70 @@
+/* confrim box outline */
+.confrim-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* confrim box display */
+.confrim-modal-box {
+  background-color: #e4efe7;
+  padding: 2rem;
+  border-radius: 15px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.confrim-modal-box h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.confrim-modal-box p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: black;
+}
+
+/* confrim box buttons */
+.confrim-modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.confrim-confirm-btn,
+.confrim-cancel-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.confrim-confirm-btn {
+  background-color: #d84040;
+  color: #fff;
+}
+
+.confrim-confirm-btn:hover {
+  background-color: #a31d1d;
+  color: #fff;
+}
+
+.confrim-cancel-btn {
+  background-color: #67ae6e;
+  color: #fff;
+}
+
+.confrim-cancel-btn:hover {
+  background-color: #328e6e;
+  color: #fff;
+}

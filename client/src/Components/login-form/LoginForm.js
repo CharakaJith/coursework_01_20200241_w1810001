@@ -2,6 +2,7 @@ import './loginForm.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { VALIDATE } from '../../common/messages';
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -47,7 +48,7 @@ function LoginForm() {
 
     try {
       if (!email || email.trim().length === 0 || !password || password.trim().length === 0) {
-        setError('One or more fields are empty!');
+        setError(VALIDATE.EMPTY_FIELDS);
         setIsError(true);
       } else {
         const body = {

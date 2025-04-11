@@ -2,6 +2,7 @@ import './signupForm.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { USER, VALIDATE } from '../../common/messages';
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -48,7 +49,7 @@ function SignupForm() {
         !confirmPassword ||
         confirmPassword.trim().length === 0
       ) {
-        setError('One or more fields are empty!');
+        setError(VALIDATE.EMPTY_FIELDS);
         setIsError(true);
       } else {
         const body = {
@@ -62,7 +63,7 @@ function SignupForm() {
           .post('/api/v1/user', body, {})
           .then((res) => {
             if (res.data.success === true) {
-              localStorage.setItem('signupMessage', 'You have signed up successfully. Please log in to continue.');
+              localStorage.setItem('signupMessage', USER.SIGNED_UP);
 
               navigate('/login');
             } else {
@@ -118,7 +119,7 @@ function SignupForm() {
     // check if confirmPassword is already filled
     if (confirmPassword && newPassword !== confirmPassword) {
       setIsError(true);
-      setError('Passwords do not match!');
+      setError(VALIDATE.PASSWORD_MISMATCH);
     } else {
       setIsError(false);
       setError('');
@@ -132,7 +133,7 @@ function SignupForm() {
 
     if (newConfirmPassword !== password) {
       setIsError(true);
-      setError('Passwords do not match!');
+      setError(VALIDATE.PASSWORD_MISMATCH);
     } else {
       setIsError(false);
       setError('');

@@ -1,5 +1,3 @@
-const { error } = require('winston');
-
 module.exports = {
   // database initialization messages
   DATABASE: {
