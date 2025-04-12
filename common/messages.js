@@ -14,6 +14,9 @@ module.exports = {
       INVALID_CRED: 'Invalid user credentials!',
       INACTIVE: 'User is not active!',
     },
+    COUNTRY: {
+      INVALID: 'Country not found!',
+    },
     KEY: {
       LIMIT_FULL: 'Maximum API key limit reached!',
       NOT_FOUND: 'No API keys found!',

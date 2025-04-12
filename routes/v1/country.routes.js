@@ -6,5 +6,6 @@ const countryRouter = express.Router();
 countryRouter.use(authenticate);
 
 countryRouter.get('/', countryController.fetchAll);
+countryRouter.get('/:id', countryController.fetchById);
 
 module.exports = countryRouter;

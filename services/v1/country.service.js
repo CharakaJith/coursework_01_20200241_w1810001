@@ -1,7 +1,12 @@
+const logger = require('../../middlewares/log/logger');
+const CustomError = require('../../util/customError');
 const restCountriesService = require('../restCountries.service');
 const countryDao = require('../../repositories/v1/country.dao');
 const currencyDao = require('../../repositories/v1/currency.dao');
+const field_validator = require('../../util/field_validator');
 const { STATUS_CODE, CACHE } = require('../../constants/app.constants');
+const { LOG_TYPE } = require('../../constants/logger.constants');
+const { RESPONSE } = require('../../common/messages');
 
 const countryService = {
   fetchAllCountries: async (data) => {
@@ -50,6 +55,38 @@ const countryService = {
       status: STATUS_CODE.OK,
       data: {
         countries: countries,
+      },
+    };
+  },
+
+  fetchCountryById: async (countryId) => {
+    // validate country id
+    const errorArray = [];
+    errorArray.push(await field_validator.validate_number(countryId, 'id'));
+
+    // check request data
+    const filteredErrors = errorArray.filter((obj) => obj !== 1);
+    if (filteredErrors.length !== 0) {
+      logger(LOG_TYPE.ERROR, false, STATUS_CODE.BAD_REQUEST, filteredErrors);
+
+      return {
+        success: false,
+        status: STATUS_CODE.BAD_REQUEST,
+        data: filteredErrors,
+      };
+    }
+
+    // fetch country
+    const country = await countryDao.getById(countryId);
+    if (!country) {
+      throw new CustomError(RESPONSE.COUNTRY.INVALID, STATUS_CODE.NOT_FOUND);
+    }
+
+    return {
+      success: true,
+      status: STATUS_CODE.OK,
+      data: {
+        country: country,
       },
     };
   },

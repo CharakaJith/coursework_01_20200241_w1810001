@@ -13,10 +13,10 @@ const field_validator = {
   },
 
   validate_number: async (value, param) => {
-    if (!value) {
+    if (isNaN(value) || isNaN(parseFloat(value))) {
       return {
         fields: param,
-        message: VALIDATE.PARAM.EMPTY(param),
+        message: VALIDATE.PARAM.INVALID(param),
       };
     }
 

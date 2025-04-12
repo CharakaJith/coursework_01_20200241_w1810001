@@ -36,6 +36,18 @@ const countryDao = {
     }
   },
 
+  getById: async (countryId) => {
+    try {
+      return await models.Country.findOne({
+        where: {
+          id: countryId,
+        },
+      });
+    } catch (error) {
+      throw new CustomError(DAO.FAILED.GET.BY_ID(ENTITY.COUNTRY, error), STATUS_CODE.SERVER_ERROR);
+    }
+  },
+
   delete: async () => {
     try {
       await models.Country.destroy({
