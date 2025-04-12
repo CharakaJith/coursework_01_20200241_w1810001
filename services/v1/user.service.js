@@ -6,7 +6,7 @@ const jwtService = require('../jwt.service');
 const field_validator = require('../../util/field_validator');
 const { LOG_TYPE } = require('../../constants/logger.constants');
 const { STATUS_CODE } = require('../../constants/app.constants');
-const { RESPONSE } = require('../../common/messages');
+const { RESPONSE, JWT } = require('../../common/messages');
 
 const userService = {
   userSignup: async (data) => {
@@ -118,6 +118,95 @@ const userService = {
       },
       accessToken: accessToken,
       refreshToken: refreshToken,
+    };
+  },
+
+  updateUserDetails: async (data) => {
+    const { id, firstName, lastName } = data;
+
+    // validate user details
+    const errorArray = [];
+    errorArray.push(await field_validator.validate_string(firstName, 'firstName'));
+    errorArray.push(await field_validator.validate_string(lastName, 'lastName'));
+
+    // check request data
+    const filteredErrors = errorArray.filter((obj) => obj !== 1);
+    if (filteredErrors.length !== 0) {
+      logger(LOG_TYPE.ERROR, false, STATUS_CODE.BAD_REQUEST, filteredErrors);
+
+      return {
+        success: false,
+        status: STATUS_CODE.BAD_REQUEST,
+        data: filteredErrors,
+      };
+    }
+
+    // get and validate user
+    const user = await userDao.getById(id);
+    if (!user) {
+      throw new CustomError(RESPONSE.USER.NOT_FOUND);
+    }
+    if (user.id !== id) {
+      throw new CustomError(JWT.AUTH.FORBIDDEN, STATUS_CODE.FORBIDDON);
+    }
+    if (!user.isActive) {
+      throw new CustomError(RESPONSE.USER.INACTIVE, STATUS_CODE.FORBIDDON);
+    }
+
+    // update user
+    const userData = {
+      id: user.id,
+      firstName: firstName,
+      lastName: lastName,
+      password: user.password,
+      isActive: user.isActive,
+    };
+    await userDao.update(userData);
+
+    // fetch updated user
+    const updatedUser = await userDao.getById(id);
+
+    // remove password
+    delete updatedUser.dataValues.password;
+
+    return {
+      success: true,
+      status: STATUS_CODE.OK,
+      data: {
+        user: updatedUser,
+      },
+    };
+  },
+
+  deactivateUser: async (userId) => {
+    // get and validate user
+    const user = await userDao.getById(userId);
+    if (!user) {
+      throw new CustomError(RESPONSE.USER.NOT_FOUND);
+    }
+    if (user.id !== userId) {
+      throw new CustomError(JWT.AUTH.FORBIDDEN, STATUS_CODE.FORBIDDON);
+    }
+    if (!user.isActive) {
+      throw new CustomError(RESPONSE.USER.INACTIVE, STATUS_CODE.FORBIDDON);
+    }
+
+    // deactivate user
+    const userData = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      password: user.password,
+      isActive: false,
+    };
+    await userDao.update(userData);
+
+    return {
+      success: true,
+      status: STATUS_CODE.GONE,
+      data: {
+        message: RESPONSE.USER.DEACTIVATED,
+      },
     };
   },
 };

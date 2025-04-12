@@ -13,6 +13,8 @@ module.exports = {
       EXISTS: 'User already registered!',
       INVALID_CRED: 'Invalid user credentials!',
       INACTIVE: 'User is not active!',
+      NOT_FOUND: 'User not found!',
+      DEACTIVATED: 'User profile permanently deleted!',
     },
     COUNTRY: {
       INVALID: 'Country not found!',

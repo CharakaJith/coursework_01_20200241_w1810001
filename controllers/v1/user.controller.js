@@ -53,6 +53,50 @@ const userController = {
       next(error);
     }
   },
+
+  update: async (req, res, next) => {
+    try {
+      const { id } = req.user;
+      const { firstName, lastName } = req.body;
+      const userDetails = {
+        id,
+        firstName,
+        lastName,
+      };
+
+      const response = await userService.updateUserDetails(userDetails);
+      const { success, status, data } = response;
+
+      res.status(status).json({
+        success: success,
+        response: {
+          status: status,
+          data: data,
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  deactivate: async (req, res, next) => {
+    try {
+      const userId = req.user.id;
+
+      const response = await userService.deactivateUser(userId);
+      const { success, status, data } = response;
+
+      res.status(status).json({
+        success: success,
+        response: {
+          status: status,
+          data: data,
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = userController;

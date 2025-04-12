@@ -26,10 +26,31 @@ const userDao = {
       return await models.User.findOne({
         where: {
           email: userEmail,
+          isActive: true,
         },
       });
     } catch (error) {
       throw new CustomError(DAO.FAILED.GET.BY_EMAIL(ENTITY.USER, error), STATUS_CODE.SERVER_ERROR);
+    }
+  },
+
+  update: async (user) => {
+    try {
+      return await models.User.update(
+        {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          password: user.password,
+          isActive: user.isActive,
+        },
+        {
+          where: {
+            id: user.id,
+          },
+        }
+      );
+    } catch (error) {
+      throw new CustomError(DAO.FAILED.UPDATE(ENTITY.USER, error), STATUS_CODE.SERVER_ERROR);
     }
   },
 };
