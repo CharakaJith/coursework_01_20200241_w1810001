@@ -14,6 +14,7 @@
   border-radius: 15px;
   padding: 20px;
   overflow: hidden;
+  overflow-y: auto;
 }
 
 .endpoint-display-header {
@@ -45,8 +46,7 @@
 .side-by-side-boxes {
   display: flex;
   gap: 10px;
-  width: 100%;
-  height: 100%;
+  flex-wrap: wrap;
 }
 
 .box-left {
@@ -147,4 +147,10 @@
   margin: 0;
   font-size: smaller;
   word-break: break-word;
+}
+
+.endpoint-box hr {
+  border: 0;
+  border-top: 3px solid #e0e0e0;
+  margin: 5px 0;
 }
