@@ -42,6 +42,13 @@ const countryDao = {
         where: {
           id: countryId,
         },
+        include: [
+          {
+            model: models.Currency,
+            as: ENTITY.CURRENCY,
+          },
+        ],
+        attributes: { exclude: ['currencyId'] },
       });
     } catch (error) {
       throw new CustomError(DAO.FAILED.GET.BY_ID(ENTITY.COUNTRY, error), STATUS_CODE.SERVER_ERROR);

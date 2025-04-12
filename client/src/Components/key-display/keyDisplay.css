@@ -63,7 +63,7 @@
 
 /* api key management display */
 .key-box {
-  background-color: #9acbd0;
+  background-color: #134b70;
   color: #fff;
   border-radius: 15px;
   padding: 20px;
@@ -154,11 +154,11 @@
 }
 
 .revoke-btn:hover {
-  background-color: #a31d1d;
+  background-color: #b23131;
 }
 
 .copy-btn {
-  background-color: #48a6a7;
+  background-color: #e9c46a;
   color: white;
   border: none;
   border-radius: 5px;
@@ -168,7 +168,7 @@
 }
 
 .copy-btn:hover {
-  background-color: #006a71;
+  background-color: #d4aa3f;
 }
 
 .btn-icon {

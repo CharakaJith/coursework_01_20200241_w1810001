@@ -86,6 +86,11 @@ function CountryDisplay() {
     }
   };
 
+  // handle click
+  const handleCountryClick = (country) => {
+    navigate(`/country/${country.id}`);
+  };
+
   return (
     <div className="country-display">
       {/* heading */}
@@ -128,7 +133,7 @@ function CountryDisplay() {
               </thead>
               <tbody>
                 {filteredCountries.map((country, index) => (
-                  <tr key={index}>
+                  <tr key={index} onClick={() => handleCountryClick(country)}>
                     <td>
                       <img src={country.flagUrl} alt={country.commonName} width="70" />
                     </td>

@@ -6,6 +6,7 @@ import ContactPage from './Pages/ContactPage/ContactPage';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import SignupPage from './Pages/SignupPage/SignupPage';
 import DashboardPage from './Pages/DashboardPage/DashboardPage';
+import CountryDetailPage from './Pages/CountryDetailPage/CountryDetailPage';
 import ProfilePage from './Pages/ProfilePage/ProfilePage';
 import ApiKeyPage from './Pages/ApiKeyPage/ApiKeyPage';
 import EndpointPage from './Pages/EndpointPage/EndpointPage';
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/profile" element={<ProfilePage />} />
         <Route exact path="/keys" element={<ApiKeyPage />} />
         <Route exact path="/endpoints" element={<EndpointPage />} />
+        <Route exact path="/country/:id" element={<CountryDetailPage />} />
       </Routes>
     </BrowserRouter>
   );

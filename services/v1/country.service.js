@@ -82,6 +82,9 @@ const countryService = {
       throw new CustomError(RESPONSE.COUNTRY.INVALID, STATUS_CODE.NOT_FOUND);
     }
 
+    // parse country language
+    country.languages = JSON.parse(country.languages);
+
     return {
       success: true,
       status: STATUS_CODE.OK,
