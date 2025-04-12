@@ -1,0 +1,79 @@
+/* edit box overlay */
+.edit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* edit box styling */
+.edit-modal-box {
+  background-color: #e4efe7;
+  padding: 2rem;
+  border-radius: 15px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.edit-modal-box h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+/* form inputs */
+.input-group {
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* buttons */
+.edit-modal-box button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0 0.5rem;
+}
+
+.edit-modal-box button[type='submit'] {
+  background-color: #67ae6e;
+  color: white;
+}
+
+.edit-modal-box button[type='submit']:hover {
+  background-color: #328e6e;
+}
+
+.edit-modal-box button[type='button'] {
+  background-color: #d84040;
+  color: white;
+}
+
+.edit-modal-box button[type='button']:hover {
+  background-color: #a31d1d;
+}
