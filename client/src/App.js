@@ -10,6 +10,7 @@ import CountryDetailPage from './Pages/CountryDetailPage/CountryDetailPage';
 import ProfilePage from './Pages/ProfilePage/ProfilePage';
 import ApiKeyPage from './Pages/ApiKeyPage/ApiKeyPage';
 import EndpointPage from './Pages/EndpointPage/EndpointPage';
+import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route exact path="/keys" element={<ApiKeyPage />} />
         <Route exact path="/endpoints" element={<EndpointPage />} />
         <Route exact path="/country/:id" element={<CountryDetailPage />} />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
