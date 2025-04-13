@@ -58,7 +58,13 @@ function SideNavbar() {
 
       {/* logout button */}
       <div className="btn-container">
-        <button className="full-width-btn" onClick={handleLogout}>
+        <button
+          type="button"
+          className="full-width-btn"
+          onClick={() => {
+            handleLogout();
+          }}
+        >
           <img src={logout} alt="Logout" className="btn-icon" /> Logout
         </button>
       </div>

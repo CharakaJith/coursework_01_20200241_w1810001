@@ -207,7 +207,7 @@ function KeyDisplay() {
         </p>
         <ul>
           <li>
-            You can have a maximum of <strong>3 active API keys</strong> at a time.
+            You can have a maximum of <strong>2 active API keys</strong> at a time.
           </li>
           <li>
             Each API key is valid for <strong>30 days</strong> from the date of generation.
@@ -221,7 +221,14 @@ function KeyDisplay() {
       {/* key generate box */}
       <div className="key-box">
         {/* generate button */}
-        <button className="btn" onClick={handleGenerate} disabled={apiKeys.length >= KEY.LENGTH}>
+        <button
+          type="button"
+          className="btn"
+          onClick={() => {
+            handleGenerate();
+          }}
+          disabled={apiKeys.length >= KEY.LENGTH}
+        >
           Generate API Key
         </button>
 
@@ -238,12 +245,12 @@ function KeyDisplay() {
                     </span>
 
                     {/* copy button */}
-                    <button className="copy-btn" onClick={() => handleCopy(key.apiKey)}>
+                    <button type="button" className="copy-btn" onClick={() => handleCopy(key.apiKey)}>
                       <img src={copy} alt="Copy" className="btn-icon"></img>
                     </button>
 
                     {/* revoke button */}
-                    <button className="revoke-btn" onClick={() => handleRevoke(key.id)}>
+                    <button type="button" className="revoke-btn" onClick={() => handleRevoke(key.id)}>
                       Revoke
                     </button>
                   </div>

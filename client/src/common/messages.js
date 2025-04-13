@@ -23,6 +23,10 @@ module.exports = {
       TITLE: 'Change Password',
       MESSAGE: 'Are you sure you want to change your password?',
     },
+    DELETE: {
+      TITLE: 'Deactivate Account',
+      MESSAGE: 'Are you sure you want to deactivate your account? This action may be irreversible.',
+    },
     COPY: {
       MESSAGE: 'API key copied to clipboard.',
     },

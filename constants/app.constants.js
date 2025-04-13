@@ -43,6 +43,6 @@ module.exports = {
       BLOCKED: 'BLOCKED',
     },
 
-    MAX_COUNT: 3,
+    MAX_COUNT: 2,
   }),
 };

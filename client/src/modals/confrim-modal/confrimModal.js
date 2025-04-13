@@ -9,10 +9,10 @@ function ConfirmModal({ isOpen, onClose, onConfirm, title, message }) {
         <h2>{title}</h2>
         <p>{message}</p>
         <div className="confrim-modal-buttons">
-          <button className="confrim-confirm-btn" onClick={onConfirm}>
+          <button type="button" className="confrim-confirm-btn" onClick={onConfirm}>
             Confrim
           </button>
-          <button className="confrim-cancel-btn" onClick={onClose}>
+          <button type="button" className="confrim-cancel-btn" onClick={onClose}>
             Cancel
           </button>
         </div>

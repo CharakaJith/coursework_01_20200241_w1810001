@@ -2,6 +2,7 @@ import './profileDisplay.css';
 import axios from 'axios';
 import EditModal from '../../modals/edit-modal/editModal';
 import ConfirmModal from '../../modals/confrim-modal/confrimModal';
+import DeleteModal from '../../modals/delete-modal/deleteModal';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MODAL, USER, VALIDATE } from '../../common/messages';
@@ -21,6 +22,7 @@ function ProfileDisplay() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const [editOpen, setEditOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [confrimTitle, setConfrimTitle] = useState('');
   const [confrimMessage, setConfrimMessage] = useState('');
@@ -82,6 +84,59 @@ function ProfileDisplay() {
 
       setEditOpen(false);
     } catch (error) {}
+  };
+
+  // confrim delete
+  const handleDelete = () => {
+    setDeleteOpen(true);
+  };
+
+  // handle delete
+  const confrimDelete = () => {
+    // validate access token
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      localStorage.setItem('signupMessage', USER.LOGGED_OUT);
+      navigate('/login');
+
+      return;
+    }
+
+    api
+      .delete('/api/v1/user', {
+        headers: {
+          Authorization: `"${accessToken}"`,
+        },
+      })
+      .then((res) => {
+        if (res.data.success === true) {
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('user');
+
+          navigate('/');
+        }
+      })
+      .catch((error) => {
+        console.error(`Error deactivating user: ${error.message}`);
+
+        // check if access token expire
+        if (error.response.data.response.status === 401) {
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('user');
+
+          localStorage.setItem('signupMessage', USER.SESSION_EXP);
+          navigate('/login');
+
+          return;
+        } else if (error.response.data.response.status === 410) {
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('user');
+
+          navigate('/');
+        }
+      });
+
+    setDeleteOpen(false);
   };
 
   // validate form fields
@@ -303,13 +358,33 @@ function ProfileDisplay() {
               </div>
             </form>
           </div>
+          <hr />
+
+          {/* deactivate profile */}
+          <div className="deactivate-section">
+            <div className="profile-header">
+              <h3>Deactivate account</h3>
+            </div>
+
+            <div className="deactivate-button-wrapper">
+              <button
+                type="button"
+                className="deactivate-button"
+                onClick={() => {
+                  handleDelete();
+                }}
+              >
+                Deactivate
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* edit modal */}
-      <EditModal isOpen={editOpen} onClose={() => setEditOpen(false)} onSubmit={confrimEdit} firstName={user.firstName} lastName={user.lastName} />
+      <EditModal isOpen={editOpen} onClose={() => setEditOpen(false)} onConfirm={confrimEdit} firstName={user.firstName} lastName={user.lastName} />
 
-      {/* Cconfrim modal */}
+      {/* confrim modal */}
       <ConfirmModal
         isOpen={confirmOpen}
         onClose={() => setConfirmOpen(false)}
@@ -317,6 +392,9 @@ function ProfileDisplay() {
         title={confrimTitle}
         message={confrimMessage}
       />
+
+      {/* delete modal */}
+      <DeleteModal isOpen={deleteOpen} onClose={() => setDeleteOpen(false)} onConfirm={confrimDelete} email={user.email} />
     </div>
   );
 }

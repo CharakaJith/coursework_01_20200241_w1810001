@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
 import './editModal.css';
+import { useState, useEffect } from 'react';
 
-function EditModal({ isOpen, onClose, onSubmit, firstName: propFirstName, lastName: propLastName }) {
+function EditModal({ isOpen, onClose, onConfirm, firstName: propFirstName, lastName: propLastName }) {
   const [firstName, setFirstName] = useState(propFirstName);
   const [lastName, setLastName] = useState(propLastName);
 
-  // Update state if props change (e.g., when EditModal is reopened with different values)
   useEffect(() => {
     setFirstName(propFirstName);
     setLastName(propLastName);
@@ -14,9 +13,10 @@ function EditModal({ isOpen, onClose, onSubmit, firstName: propFirstName, lastNa
   const handleFirstNameChange = (e) => setFirstName(e.target.value);
   const handleLastNameChange = (e) => setLastName(e.target.value);
 
+  // handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ firstName, lastName });
+    onConfirm({ firstName, lastName });
     onClose();
   };
 

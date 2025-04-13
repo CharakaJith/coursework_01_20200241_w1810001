@@ -1,5 +1,5 @@
 module.exports = {
   KEY: Object.freeze({
-    LENGTH: 3,
+    LENGTH: 2,
   }),
 };
