@@ -10,6 +10,7 @@ userRouter.post('/login', userController.login);
 userRouter.use(authenticate);
 
 userRouter.put('/', userController.update);
+userRouter.put('/password', userController.updatePassword);
 userRouter.delete('/', userController.deactivate);
 
 module.exports = userRouter;

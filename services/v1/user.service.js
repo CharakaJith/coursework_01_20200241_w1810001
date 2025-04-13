@@ -178,6 +178,66 @@ const userService = {
     };
   },
 
+  updateUserPassword: async (data) => {
+    const { id, oldPassword, newPassword } = data;
+
+    // validate user details
+    const errorArray = [];
+    errorArray.push(await field_validator.validate_string(oldPassword, 'oldPassword'));
+    errorArray.push(await field_validator.validate_string(newPassword, 'newPassword'));
+
+    // check request data
+    const filteredErrors = errorArray.filter((obj) => obj !== 1);
+    if (filteredErrors.length !== 0) {
+      logger(LOG_TYPE.ERROR, false, STATUS_CODE.BAD_REQUEST, filteredErrors);
+
+      return {
+        success: false,
+        status: STATUS_CODE.BAD_REQUEST,
+        data: filteredErrors,
+      };
+    }
+
+    // get and validate user
+    const user = await userDao.getById(id);
+    if (!user) {
+      throw new CustomError(RESPONSE.USER.NOT_FOUND);
+    }
+    if (user.id !== id) {
+      throw new CustomError(JWT.AUTH.FORBIDDEN, STATUS_CODE.FORBIDDON);
+    }
+    if (!user.isActive) {
+      throw new CustomError(RESPONSE.USER.INACTIVE, STATUS_CODE.FORBIDDON);
+    }
+
+    // validate password
+    const isValidPassword = await bcrypt.compare(oldPassword, user.password);
+    if (!isValidPassword) {
+      throw new CustomError(RESPONSE.USER.INVALID_CRED, STATUS_CODE.UNAUTHORIZED);
+    }
+
+    // hash new password
+    const encryptedPassword = await bcrypt.hash(newPassword, 10);
+
+    // update user
+    const userData = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      password: encryptedPassword,
+      isActive: user.isActive,
+    };
+    await userDao.update(userData);
+
+    return {
+      success: true,
+      status: STATUS_CODE.OK,
+      data: {
+        message: RESPONSE.USER.PWD_UPDATED,
+      },
+    };
+  },
+
   deactivateUser: async (userId) => {
     // get and validate user
     const user = await userDao.getById(userId);

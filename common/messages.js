@@ -15,6 +15,7 @@ module.exports = {
       INACTIVE: 'User is not active!',
       NOT_FOUND: 'User not found!',
       DEACTIVATED: 'User profile permanently deleted!',
+      PWD_UPDATED: 'User password updated!',
     },
     COUNTRY: {
       INVALID: 'Country not found!',

@@ -79,6 +79,31 @@ const userController = {
     }
   },
 
+  updatePassword: async (req, res, next) => {
+    try {
+      const { id } = req.user;
+      const { oldPassword, newPassword } = req.body;
+      const userDetails = {
+        id,
+        oldPassword,
+        newPassword,
+      };
+
+      const response = await userService.updateUserPassword(userDetails);
+      const { success, status, data } = response;
+
+      res.status(status).json({
+        success: success,
+        response: {
+          status: status,
+          data: data,
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
   deactivate: async (req, res, next) => {
     try {
       const userId = req.user.id;
