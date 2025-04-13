@@ -82,38 +82,35 @@ function SignupForm() {
   };
 
   // handle first name on change
-  const handleFirstnameChange = (event) => {
-    setFirstname(event.target.value);
+  const handleFirstnameChange = (e) => {
+    setFirstname(e.target.value);
 
     if (firstname) {
       setIsError(false);
-    } else {
     }
   };
 
   // handle last name on change
-  const handleLastnameChange = (event) => {
-    setLastname(event.target.value);
+  const handleLastnameChange = (e) => {
+    setLastname(e.target.value);
 
     if (lastname) {
       setIsError(false);
-    } else {
     }
   };
 
   // handle email on change
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
 
     if (email) {
       setIsError(false);
-    } else {
     }
   };
 
   // handle password on change
-  const handlePasswordChange = (event) => {
-    const newPassword = event.target.value;
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
     setPassword(newPassword);
 
     // check if confirmPassword is already filled
@@ -127,8 +124,8 @@ function SignupForm() {
   };
 
   // handle confrim password on change
-  const handleConfrimPasswordChange = (event) => {
-    const newConfirmPassword = event.target.value;
+  const handleConfrimPasswordChange = (e) => {
+    const newConfirmPassword = e.target.value;
     setConfirmPassword(newConfirmPassword);
 
     if (newConfirmPassword !== password) {
@@ -180,7 +177,7 @@ function SignupForm() {
 
         {/* sign up button */}
         <div>
-          <button className={`btn ${isError || !isFormValid() ? 'disabled-btn' : ''}`} disabled={isError || !isFormValid()}>
+          <button className={`btn ${isError || !isFormValid() ? 'signup-disabled-btn' : ''}`} disabled={isError || !isFormValid()}>
             Sign Up
           </button>
         </div>

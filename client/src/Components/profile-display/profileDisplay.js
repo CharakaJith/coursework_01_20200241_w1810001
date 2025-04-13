@@ -4,7 +4,7 @@ import EditModal from '../../modals/edit-modal/editModal';
 import ConfirmModal from '../../modals/confrim-modal/confrimModal';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { USER } from '../../common/messages';
+import { MODAL, USER, VALIDATE } from '../../common/messages';
 
 import edit from '../../assets/icons/edit.png';
 
@@ -16,10 +16,16 @@ const api = axios.create({
 
 function ProfileDisplay() {
   const [user, setUser] = useState({});
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   const [editOpen, setEditOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [confrimTitle, setConfrimTitle] = useState('');
   const [confrimMessage, setConfrimMessage] = useState('');
+  const [error, setError] = useState('');
+  const [isError, setIsError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -78,6 +84,126 @@ function ProfileDisplay() {
     } catch (error) {}
   };
 
+  // validate form fields
+  const isPasswordFormValid = () => {
+    return currentPassword && newPassword && confirmPassword && newPassword === confirmPassword;
+  };
+
+  // handle current password on change
+  const handleCurrentPasswordChange = (e) => {
+    setCurrentPassword(e.target.value);
+
+    if (currentPassword) {
+      setIsError(false);
+    }
+  };
+
+  // handle new password on change
+  const handleNewPasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setNewPassword(newPassword);
+
+    // check confrim password is already filled
+    if (confirmPassword && newPassword !== confirmPassword) {
+      setIsError(true);
+      setError(VALIDATE.PASSWORD_MISMATCH);
+    } else {
+      setIsError(false);
+      setError('');
+    }
+  };
+
+  // handle confrim password on change
+  const handleConfrimPasswordChange = (e) => {
+    const newConfirmPassword = e.target.value;
+    setConfirmPassword(newConfirmPassword);
+
+    if (newConfirmPassword !== newPassword) {
+      setIsError(true);
+      setError(VALIDATE.PASSWORD_MISMATCH);
+    } else {
+      setIsError(false);
+      setError('');
+    }
+  };
+
+  // confrim change password
+  const handleChangePassword = (e) => {
+    e.preventDefault();
+
+    setConfrimTitle(MODAL.UPDATE.TITLE);
+    setConfrimMessage(MODAL.UPDATE.MESSAGE);
+    setConfirmOpen(true);
+
+    // close after 1 minute
+    setTimeout(() => {
+      setConfirmOpen(false);
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+    }, 60000);
+  };
+
+  // change password
+  const confrimChangePassword = () => {
+    // validate access token
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      localStorage.setItem('signupMessage', USER.LOGGED_OUT);
+      navigate('/login');
+      return;
+    }
+
+    // request body
+    const body = {
+      oldPassword: currentPassword,
+      newPassword: newPassword,
+    };
+
+    api
+      .put('/api/v1/user/password', body, {
+        headers: {
+          Authorization: `"${accessToken}"`,
+        },
+      })
+      .then((res) => {
+        if (res.data.success === true) {
+          if (res.data.response.status === 200) {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('user');
+            localStorage.setItem('signupMessage', USER.PASSWORD_CHANGED);
+            navigate('/login');
+          }
+        }
+      })
+      .catch((error) => {
+        console.error(`Error updating password: ${error.message}`);
+
+        if (error.response.data.response.status === 401) {
+          if (error.response.data.response.data.message === 'Current password is incorrect.') {
+            setError(error.response.data.response.data.message);
+            setIsError(true);
+            setConfirmOpen(false);
+          } else {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('user');
+            localStorage.setItem('signupMessage', USER.SESSION_EXP);
+            navigate('/login');
+          }
+        }
+      });
+  };
+
+  // handle discard
+  const handleDiscard = () => {
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+
+    setIsError(false);
+    setError('');
+  };
+
   return (
     <div className="profile-display">
       <div className="country-display-header">
@@ -88,8 +214,8 @@ function ProfileDisplay() {
       </div>
 
       <div className="profile-separator">
+        {/* personal details */}
         <div className="profile-left">
-          {/* personal details */}
           <div className="profile-header">
             <h3>Personal details</h3>
             <img
@@ -123,16 +249,74 @@ function ProfileDisplay() {
             </tbody>
           </table>
         </div>
+
+        {/* security details */}
         <div className="profile-right">
-          {/* security details */}
           <div className="profile-header">
-            <h3>Security details</h3>
+            <h3>Change password</h3>
+          </div>
+
+          <div className="change-password-section">
+            <form className="change-password-form" onSubmit={handleChangePassword}>
+              <div className="password-input-row">
+                <p>Current password</p>
+                <input value={currentPassword} onChange={handleCurrentPasswordChange} type="password" placeholder="Enter your current password" />
+              </div>
+              <div className="password-input-row">
+                <p>New password</p>
+                <input value={newPassword} onChange={handleNewPasswordChange} type="password" placeholder="Enter your new password" />
+              </div>
+              <div className="password-input-row">
+                <p>Confirm password</p>
+                <input value={confirmPassword} onChange={handleConfrimPasswordChange} type="password" placeholder="Confrim your new password" />
+              </div>
+
+              {/* error box */}
+              <>
+                {isError ? (
+                  <div className="password-error-box">
+                    <text>{error}</text>
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </>
+
+              {/* buttons */}
+              <div className="password-form-buttons">
+                <button
+                  type="submit"
+                  className={`btn ${isError || !isPasswordFormValid() ? 'disabled-btn' : ''}`}
+                  disabled={isError || !isPasswordFormValid()}
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  className="discard-btn"
+                  onClick={() => {
+                    handleDiscard();
+                  }}
+                >
+                  Discard
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
 
       {/* edit modal */}
       <EditModal isOpen={editOpen} onClose={() => setEditOpen(false)} onSubmit={confrimEdit} firstName={user.firstName} lastName={user.lastName} />
+
+      {/* Cconfrim modal */}
+      <ConfirmModal
+        isOpen={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        onConfirm={confrimChangePassword}
+        title={confrimTitle}
+        message={confrimMessage}
+      />
     </div>
   );
 }

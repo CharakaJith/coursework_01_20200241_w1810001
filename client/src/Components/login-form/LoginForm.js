@@ -134,7 +134,7 @@ function LoginForm() {
 
           {/* log in button */}
           <div>
-            <button className={`btn ${isError || !isFormValid() ? 'disabled-btn' : ''}`} disabled={isError || !isFormValid()}>
+            <button className={`btn ${isError || !isFormValid() ? 'login-disabled-btn' : ''}`} disabled={isError || !isFormValid()}>
               Log In
             </button>
           </div>

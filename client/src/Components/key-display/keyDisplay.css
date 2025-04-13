@@ -34,7 +34,7 @@
 /* api key instructions box */
 .instruction-box {
   background-color: #f2efe7;
-  color: #006a71;
+  color: #41644a;
   border-radius: 15px;
   padding: 20px;
   width: 100%;
@@ -162,9 +162,9 @@
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 5px;
+  padding-left: 12px;
   cursor: pointer;
-  margin-left: 5px;
 }
 
 .copy-btn:hover {
@@ -174,6 +174,5 @@
 .btn-icon {
   width: 25px;
   height: 25px;
-  margin-right: 10px;
   object-fit: contain;
 }

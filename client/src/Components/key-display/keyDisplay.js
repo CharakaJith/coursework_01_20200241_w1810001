@@ -132,10 +132,14 @@ function KeyDisplay() {
     setModalTitle(MODAL.REVOKE.TITLE);
     setModalMessage(MODAL.REVOKE.MESSAGE);
     setConfirmOpen(true);
+
+    // close after 1 minute
+    setTimeout(() => setConfirmOpen(false), 60000);
   };
 
   // revoke api key
   const confirmRevoke = () => {
+    // validate access token
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
       localStorage.setItem('signupMessage', USER.LOGGED_OUT);
@@ -157,6 +161,7 @@ function KeyDisplay() {
       })
       .catch((error) => {
         console.error(`Error revoking API key: ${error.message}`);
+
         if (error.response.data.response.status === 401) {
           localStorage.removeItem('accessToken');
           localStorage.removeItem('user');
@@ -174,7 +179,8 @@ function KeyDisplay() {
         setInfoMessage(MODAL.COPY.MESSAGE);
         setInfoOpen(true);
 
-        setTimeout(() => setInfoOpen(false), 5000);
+        // close after 10 seconds
+        setTimeout(() => setInfoOpen(false), 10000);
       })
       .catch((error) => {
         console.error(`Failed copying key: ${error.message}`);

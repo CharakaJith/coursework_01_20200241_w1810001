@@ -27,6 +27,7 @@
   width: 100%;
   margin-top: 20px;
   height: 100%;
+  gap: 10px;
 }
 
 /* profile boxes */
@@ -37,15 +38,19 @@
   text-align: center;
   height: 100%;
   border-radius: 15px;
-}
-
-.profile-left {
-  border-right: 1px solid #ddd;
   background-color: #f0f0f0;
 }
 
 .profile-right {
-  background-color: #e0e0e0;
+  flex: 1;
+  padding: 20px 40px;
+  text-align: center;
+  height: 100%;
+  border-radius: 15px;
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 /* profile header */
@@ -57,10 +62,10 @@
 }
 
 .profile-header h3 {
-  margin: 0;
   text-align: left;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .edit-icon {
@@ -82,6 +87,7 @@
 
 /* personal details */
 .personal-table {
+  margin-top: 15px;
   width: 100%;
   border-collapse: collapse;
 }
@@ -100,4 +106,91 @@
 .personal-table td:last-child {
   text-align: right;
   color: #555;
+}
+
+/* change password section */
+.change-password-section {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.change-password-form {
+  width: 100%;
+  max-width: none;
+}
+
+.password-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 5px 0;
+}
+
+.password-input-row p {
+  min-width: 180px;
+  margin: 0;
+  font-weight: bold;
+  color: #333;
+  text-align: right;
+}
+
+.password-input-row input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.password-error-box {
+  background-color: rgba(178, 34, 34, 0.7);
+  color: white;
+  padding: 8px;
+  border-radius: 15px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid rgba(139, 0, 0, 0.7);
+}
+
+.password-form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.password-form-buttons .btn,
+.password-form-buttons .discard-btn {
+  padding: 10px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.password-form-buttons .btn {
+  background-color: #67ae6e;
+  color: white;
+}
+
+.password-form-buttons .btn:hover {
+  background-color: #328e6e;
+}
+
+.password-form-buttons .discard-btn {
+  background-color: #d84040;
+  color: white;
+}
+
+.password-form-buttons .discard-btn:hover {
+  background-color: #a31d1d;
+}
+
+.disabled-btn {
+  background-color: #a5d6a7 !important;
+  cursor: not-allowed;
 }

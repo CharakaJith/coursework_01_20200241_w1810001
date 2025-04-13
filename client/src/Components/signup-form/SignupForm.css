@@ -101,7 +101,7 @@
   background: #bbdefb;
 }
 
-.signup-form-wrapper .btn.disabled-btn {
+.signup-form-wrapper .btn.signup-disabled-btn {
   background: #e3f2fd;
   cursor: not-allowed;
   opacity: 0.6;
@@ -117,15 +117,15 @@
   text-align: center;
   margin-top: 10px;
   margin-bottom: 0;
-  color: #88304e;
+  color: #7c0a02;
 }
 
 .info-box a {
-  color: #88304e;
+  color: #7c0a02;
   text-decoration: none;
   font-weight: bold;
 }
 
 .info-box a:hover {
-  color: #522546;
+  color: #5f0601;
 }

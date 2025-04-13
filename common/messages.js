@@ -2,7 +2,7 @@ module.exports = {
   // database initialization messages
   DATABASE: {
     SYNC: {
-      SUCCESS: 'Database synced!',
+      SUCCESS: 'Database synced successfully.',
       FAILED: (error) => `Failed to sync database: ${error.message}`,
     },
   },
@@ -10,75 +10,76 @@ module.exports = {
   // response payload messages
   RESPONSE: {
     USER: {
-      EXISTS: 'User already registered!',
-      INVALID_CRED: 'Invalid user credentials!',
-      INACTIVE: 'User is not active!',
-      NOT_FOUND: 'User not found!',
-      DEACTIVATED: 'User profile permanently deleted!',
-      PWD_UPDATED: 'User password updated!',
+      EXISTS: 'User is already registered.',
+      INVALID_CRED: 'Invalid user credentials.',
+      INVALID_PASSWORD: 'Current password is incorrect.',
+      INACTIVE: 'User account is inactive.',
+      NOT_FOUND: 'User not found.',
+      DEACTIVATED: 'User profile has been permanently deleted.',
+      PWD_UPDATED: 'Password updated successfully.',
     },
     COUNTRY: {
-      INVALID: 'Country not found!',
+      INVALID: 'Country not found.',
     },
     KEY: {
-      LIMIT_FULL: 'Maximum API key limit reached!',
-      NOT_FOUND: 'No API keys found!',
-      INVALID_ID: 'Invali API key id!',
-      CANNOT_REVOKE: 'Cannot revoke API key!',
-      REVOKED: 'API key revoked!',
+      LIMIT_FULL: 'Maximum number of API keys reached.',
+      NOT_FOUND: 'No API keys found.',
+      INVALID_ID: 'Invalid API key ID.',
+      CANNOT_REVOKE: 'Unable to revoke this API key.',
+      REVOKED: 'API key revoked successfully.',
     },
   },
 
   // validation error messages
   VALIDATE: {
     PARAM: {
-      EMPTY: (field) => `Field ${field} is empty!`,
-      INVALID: (field) => `Invalid ${field} format!`,
+      EMPTY: (field) => `The '${field}' field is required.`,
+      INVALID: (field) => `Invalid format for '${field}'.`,
     },
   },
 
-  // dao layer error messages
+  // DAO layer error messages
   DAO: {
     FAILED: {
-      INSERT: (entity, error) => `Failed to create new ${entity}: ${error.message}`,
+      INSERT: (entity, error) => `Failed to create ${entity}: ${error.message}`,
       UPDATE: (entity, error) => `Failed to update ${entity}: ${error.message}`,
-      DELETE: (entity, error) => `Failed to destroy ${entity}: ${error.message}`,
+      DELETE: (entity, error) => `Failed to delete ${entity}: ${error.message}`,
       GET: {
-        BY_ID: (entity, error) => `Failed to get ${entity} by id: ${error.message}`,
-        BY_EMAIL: (entity, error) => `Failed to get ${entity} by email: ${error.message}`,
-        BY_CODE: (entity, error) => `Failed to get ${entity} by code: ${error.message}`,
-        RECENT: (entity, error) => `Failed to get recent ${entity}: ${error}`,
-        BY_USER: (entity, error) => `Failed to get ${entity} by user: ${error.message}`,
+        BY_ID: (entity, error) => `Failed to retrieve ${entity} by ID: ${error.message}`,
+        BY_EMAIL: (entity, error) => `Failed to retrieve ${entity} by email: ${error.message}`,
+        BY_CODE: (entity, error) => `Failed to retrieve ${entity} by code: ${error.message}`,
+        RECENT: (entity, error) => `Failed to retrieve recent ${entity}: ${error}`,
+        BY_USER: (entity, error) => `Failed to retrieve ${entity} by user: ${error.message}`,
       },
     },
   },
 
-  // jwt service messages
+  // JWT service messages
   JWT: {
     GENERATE: {
       FAILED: (token, error) => `Failed to generate ${token} token: ${error.message}`,
     },
     REFRESH: {
-      SUCCESS: 'JWT refreshed!',
+      SUCCESS: 'JWT refreshed successfully.',
       FAILED: (error) => `Failed to refresh access token: ${error.message}`,
     },
     AUTH: {
-      FAILED: 'Authentication failed!',
-      FORBIDDEN: 'Permission denied!',
+      FAILED: 'Authentication failed.',
+      FORBIDDEN: 'Access denied.',
     },
   },
 
-  // uuid service messages
+  // UUID service messages
   UUID: {
     GENERATE: {
-      FAILED: (error) => `Failed to generate uuid: ${error.message}`,
-      TIMEOUT: 'Failed to generate a unique UUID after multiple attempts!',
+      FAILED: (error) => `Failed to generate UUID: ${error.message}`,
+      TIMEOUT: 'Unable to generate a unique UUID after multiple attempts.',
     },
   },
 
   // cron job messages
   CRON: {
-    SUCCESS: 'Cron job ran successfully!',
-    FAILED: (error) => `Failed to run cron job: ${error.message}`,
+    SUCCESS: 'Cron job executed successfully.',
+    FAILED: (error) => `Cron job execution failed: ${error.message}`,
   },
 };

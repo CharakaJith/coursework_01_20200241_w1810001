@@ -213,7 +213,7 @@ const userService = {
     // validate password
     const isValidPassword = await bcrypt.compare(oldPassword, user.password);
     if (!isValidPassword) {
-      throw new CustomError(RESPONSE.USER.INVALID_CRED, STATUS_CODE.UNAUTHORIZED);
+      throw new CustomError(RESPONSE.USER.INVALID_PASSWORD, STATUS_CODE.UNAUTHORIZED);
     }
 
     // hash new password
