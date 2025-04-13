@@ -17,7 +17,7 @@
   box-sizing: border-box;
 }
 
-/* header for the key display */
+/* key display header */
 .key-display-header {
   display: flex;
   justify-content: space-between;

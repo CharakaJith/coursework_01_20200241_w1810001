@@ -19,15 +19,16 @@ function LoginForm() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    // remove access token
+    // remove access token and user
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('user');
 
     const signupMessage = localStorage.getItem('signupMessage');
     if (signupMessage) {
       setMessage(signupMessage);
       localStorage.removeItem('signupMessage');
 
-      // remove the message after 5 seconds
+      // remove the message after 8 seconds
       const timer = setTimeout(() => {
         setMessage('');
       }, 8000);

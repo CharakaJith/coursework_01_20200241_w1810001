@@ -17,6 +17,7 @@
   overflow-y: auto;
 }
 
+/* endpoint display */
 .endpoint-display-header {
   display: flex;
   justify-content: space-between;
@@ -42,7 +43,7 @@
   overflow-y: auto;
 }
 
-/* endpoint details */
+/* endpoint detail boxes */
 .side-by-side-boxes {
   display: flex;
   gap: 10px;

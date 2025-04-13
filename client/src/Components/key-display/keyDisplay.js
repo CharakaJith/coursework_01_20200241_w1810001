@@ -162,6 +162,7 @@ function KeyDisplay() {
       .catch((error) => {
         console.error(`Error revoking API key: ${error.message}`);
 
+        // check if access token expire
         if (error.response.data.response.status === 401) {
           localStorage.removeItem('accessToken');
           localStorage.removeItem('user');

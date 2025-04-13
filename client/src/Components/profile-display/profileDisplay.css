@@ -14,7 +14,8 @@
   margin-left: 250px;
 }
 
-.country-display-header {
+/* profile header */
+.profile-display-header {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -53,7 +54,7 @@
   align-items: stretch;
 }
 
-/* profile header */
+/* profile headers */
 .profile-header {
   display: flex;
   justify-content: space-between;
@@ -68,6 +69,7 @@
   margin-bottom: 10px;
 }
 
+/* edit icon */
 .edit-icon {
   width: 27px;
   height: 27px;
@@ -156,6 +158,7 @@
   border: 1px solid rgba(139, 0, 0, 0.7);
 }
 
+/* password form buttons */
 .password-form-buttons {
   display: flex;
   justify-content: flex-end;
@@ -208,6 +211,7 @@
   color: #d84040;
 }
 
+/* deactivate buttons */
 .deactivate-button-wrapper {
   display: flex;
   justify-content: center;

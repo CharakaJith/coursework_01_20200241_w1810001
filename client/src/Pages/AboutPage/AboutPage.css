@@ -1,3 +1,4 @@
+/* about page container */
 .about-page-container {
   position: relative;
   height: 100vh;
@@ -7,6 +8,7 @@
   justify-content: center;
 }
 
+/* content box */
 .about-content-box {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;

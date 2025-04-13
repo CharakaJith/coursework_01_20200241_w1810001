@@ -108,6 +108,8 @@ function CountryDisplay() {
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleKeyPress}
         />
+
+        {/* search button */}
         <button
           type="button"
           className="search-btn"
@@ -117,6 +119,8 @@ function CountryDisplay() {
         >
           Search
         </button>
+
+        {/* refresh button */}
         <button
           type="button"
           className="refresh-btn"

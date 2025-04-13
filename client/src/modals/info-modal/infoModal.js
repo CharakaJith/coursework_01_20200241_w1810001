@@ -8,6 +8,7 @@ function InfoModal({ isOpen, onConfrim, message }) {
       <div className="info-modal-box">
         <p>{message}</p>
         <div className="info-modal-buttons">
+          {/* confrim button */}
           <button className="info-confrim-button" onClick={onConfrim}>
             Confrim
           </button>

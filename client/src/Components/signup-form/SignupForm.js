@@ -21,8 +21,9 @@ function SignupForm() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    // remove access token
+    // remove access token and user
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('user');
   }, []);
 
   const navigate = useNavigate();

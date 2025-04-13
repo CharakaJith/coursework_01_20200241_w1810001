@@ -13,6 +13,7 @@ function EndpointPage() {
   useAuthRedirect();
 
   useEffect(() => {
+    // check access token
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       setIsAuthenticated(true);

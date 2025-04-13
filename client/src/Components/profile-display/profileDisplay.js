@@ -261,7 +261,7 @@ function ProfileDisplay() {
 
   return (
     <div className="profile-display">
-      <div className="country-display-header">
+      <div className="profile-display-header">
         <h1>Profile</h1>
         <h4>
           {user.firstName} {user.lastName}

@@ -13,18 +13,19 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.nav-center {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* navbar logo */
 .logo img {
   height: 60px;
   width: auto;
   margin: 0;
   padding: 0;
   display: block;
-}
-
-.nav-center {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
 }
 
 /* navbar links */

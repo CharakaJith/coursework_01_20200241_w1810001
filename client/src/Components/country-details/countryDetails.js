@@ -7,6 +7,7 @@ import { USER } from '../../common/messages';
 import close from '../../assets/icons/close.png';
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
+const wikipediaUrl = process.env.REACT_APP_WIKIPEDIA_BASE_URL;
 
 const api = axios.create({
   baseURL: apiUrl,
@@ -61,6 +62,7 @@ function CountryDetails({ countryId }) {
     } catch (error) {}
   };
 
+  // handle close
   const handleClose = () => {
     navigate('/dashboard');
   };
@@ -103,7 +105,7 @@ function CountryDetails({ countryId }) {
       {/* wikipedia link */}
       <div className="country-footer-line">
         <strong>Read more: </strong>
-        <a href={`https://en.wikipedia.org/wiki/${encodeURIComponent(country.officialName)}`} target="_blank" rel="noopener noreferrer">
+        <a href={`${wikipediaUrl}/${encodeURIComponent(country.officialName)}`} target="_blank" rel="noopener noreferrer">
           {country.commonName} on Wikipedia
         </a>
       </div>

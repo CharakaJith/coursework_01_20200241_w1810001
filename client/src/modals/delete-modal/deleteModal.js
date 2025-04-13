@@ -21,6 +21,7 @@ function DeleteModal({ isOpen, onClose, onConfirm, email: propEmail }) {
 
   if (!isOpen) return null;
 
+  // handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isMatch) {
@@ -36,12 +37,16 @@ function DeleteModal({ isOpen, onClose, onConfirm, email: propEmail }) {
           To confirm deactivation, please type <strong>{propEmail}</strong> below.
         </p>
         <form onSubmit={handleSubmit}>
+          {/* email input */}
           <input type="email" placeholder="Enter your email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} />
+
           <div className="delete-modal-buttons">
+            {/* deactivate button */}
             <button type="submit" className="delete-confirm-btn" disabled={!isMatch}>
               Deactivate
             </button>
 
+            {/* cancel button */}
             <button type="button" onClick={onClose} className="delete-cancel-btn">
               Cancel
             </button>
