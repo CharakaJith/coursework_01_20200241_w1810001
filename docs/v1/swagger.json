@@ -331,6 +331,19 @@
               "$ref": "#/definitions/AllCountriesSuccessResponse"
             }
           },
+          "401": {
+            "description": "Authentication token failed.",
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AuthFailedResponse"
+                },
+                {
+                  "$ref": "#/definitions/UserPasswordUnauthResponse"
+                }
+              ]
+            }
+          },
           "500": {
             "description": "Unexpected server error occurred in the system.",
             "schema": {
@@ -361,6 +374,19 @@
             "description": "Invalid type of ID.",
             "schema": {
               "$ref": "#/definitions/CountryByIdBadResponse"
+            }
+          },
+          "401": {
+            "description": "Authentication token failed.",
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AuthFailedResponse"
+                },
+                {
+                  "$ref": "#/definitions/UserPasswordUnauthResponse"
+                }
+              ]
             }
           },
           "404": {
@@ -552,6 +578,51 @@
             "description": "API key is not valid or inactive.",
             "schema": {
               "$ref": "#/definitions/PublicCountriesUnauthResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error occurred in the system.",
+            "schema": {
+              "$ref": "#/definitions/ServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+
+    "/public/country/1": {
+      "get": {
+        "tags": ["Public"],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Fetch a country by ID from the public API.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Fetched country by ID.",
+            "schema": {
+              "$ref": "#/definitions/CountryByIdSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid type of ID.",
+            "schema": {
+              "$ref": "#/definitions/CountryByIdBadResponse"
+            }
+          },
+          "401": {
+            "description": "API key is not valid or inactive.",
+            "schema": {
+              "$ref": "#/definitions/PublicCountriesUnauthResponse"
+            }
+          },
+          "404": {
+            "description": "Country not found.",
+            "schema": {
+              "$ref": "#/definitions/CountryByIdNotFoundResponse"
             }
           },
           "500": {
