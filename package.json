@@ -5,7 +5,11 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
+    "install:all": "npm install && cd client && npm install",
     "migrate:up": "npx sequelize-cli db:migrate",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon app.js",
+    "client": "cd client && npm start",
     "migrate:down": "npx sequelize-cli db:migrate:undo",
     "migrate:down:all": "npx sequelize-cli db:migrate:undo:all",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +17,7 @@
   "author": "Charaka Gunasinghe 20200241/w1810001",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "nodemon": "^3.1.9",
     "sequelize-cli": "^6.6.2"
   },

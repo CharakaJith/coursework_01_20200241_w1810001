@@ -2,15 +2,16 @@
   <h2 ="center">CountryScope</h2>
 </div>
 
-## This project is a secure API middleware service built for the Advanced Server-Side Web Development module (Coursework 01). It interfaces with RestCountries.com to fetch and filter country data including name, currency, capital, languages, and flag.
+### This project is a secure API middleware service built for the Advanced Server-Side Web Development module (Coursework 01). It interfaces with RestCountries.com to fetch and filter country data including name, currency, capital, languages, and flag.
 
-## The app features full user authentication, API key management, and secure data storage using SQLite with password hashing and session handling. It follows a polyglot architecture and is fully containerized with Docker for easy local deployment.
+### The app features full user authentication, API key management, and secure data storage using SQLite with password hashing and session handling. It follows a polyglot architecture and is fully containerized with Docker for easy local deployment.
 
 ### Built With
 
 - [![React][React.js]][React-url]
 - [![Node][Node.js]][Node-url]
 - [![Express][Express.js]][Express.js-url]
+- [![Sequelize][Sequelize]][Sequelize-url]
 - [![SQLite][SQLite]][SQLite-url]
 - [![Docker][Docker]][Docker-url]
 - [![Swagger][Swagger]][Swagger-url]
@@ -30,10 +31,46 @@
    ```bash
    git clone https://github.com/CharakaJith/coursework_01_20200241_w1810001.git
    ```
-
-### `.env` files setup
+2. Set up the project
+   i. Install NPM packages
+   ```bash
+   npm run install:all
+   ```
+   ii. Create database tables
+   ```bash
+   npm run migrate:up
+   ```
 
 ### Start the project
+
+1. Start the server and client
+   ```bash
+   npm run start
+   ```
+
+### Other scripts
+
+1. Start the development server
+   ```bash
+   npm run dev
+   ```
+2. Start the client
+   ```bash
+   npm run server
+   ```
+3. Undo the most recent database migration
+   ```bash
+   npm run migrate:down
+   ```
+4. Undo all database migrations
+   ```bash
+   npm run migrate:down:all
+   ```
+
+## Documentations
+
+- [Postman API documentation](https://documenter.getpostman.com/view/28014836/2sB2ca7KxT)
+- [System architecture diagram]()
 
 ## Contact
 
@@ -53,3 +90,5 @@ Email: [charaka.info@gmail.com](mailto:charaka.info@gmail.com) | LinkedIn: [Char
 [Docker-url]: https://www.docker.com/
 [Swagger]: https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black
 [Swagger-url]: https://swagger.io/
+[Sequelize]: https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white
+[Sequelize-url]: https://sequelize.org/
