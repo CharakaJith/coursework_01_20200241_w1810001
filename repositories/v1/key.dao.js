@@ -68,6 +68,18 @@ const keyDao = {
       throw new CustomError(DAO.FAILED.GET.BY_ID(ENTITY.KEYS, error), STATUS_CODE.SERVER_ERROR);
     }
   },
+
+  getKey: async (key) => {
+    try {
+      return await models.ApiKey.findOne({
+        where: {
+          apiKey: key,
+        },
+      });
+    } catch (error) {
+      throw new CustomError(DAO.FAILED.GET.BY_KEY(ENTITY.KEYS), STATUS_CODE.SERVER_ERROR);
+    }
+  },
 };
 
 module.exports = keyDao;

@@ -38,7 +38,7 @@ module.exports = {
     },
   },
 
-  // DAO layer error messages
+  // dao layer error messages
   DAO: {
     FAILED: {
       INSERT: (entity, error) => `Failed to create ${entity}: ${error.message}`,
@@ -50,11 +50,12 @@ module.exports = {
         BY_CODE: (entity, error) => `Failed to retrieve ${entity} by code: ${error.message}`,
         RECENT: (entity, error) => `Failed to retrieve recent ${entity}: ${error}`,
         BY_USER: (entity, error) => `Failed to retrieve ${entity} by user: ${error.message}`,
+        BY_KEY: (entity, error) => `Failed to retrieve ${entity} by key: ${error.message}`,
       },
     },
   },
 
-  // JWT service messages
+  // jwt service messages
   JWT: {
     GENERATE: {
       FAILED: (token, error) => `Failed to generate ${token} token: ${error.message}`,
@@ -69,7 +70,14 @@ module.exports = {
     },
   },
 
-  // UUID service messages
+  // api key service messages
+  API_KEY: {
+    MISSING: 'API key missing in x-api-key header',
+    INVALID: 'API key is invalid or does not exist',
+    NOT_ACTIVE: 'API key is not active. It may be expired, revoked, or blocked',
+  },
+
+  // uuid service messages
   UUID: {
     GENERATE: {
       FAILED: (error) => `Failed to generate UUID: ${error.message}`,
