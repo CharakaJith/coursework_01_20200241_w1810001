@@ -1,8 +1,32 @@
 import './endpointDisplay.css';
+import InfoModal from '../../modals/info-modal/infoModal';
+import { useState } from 'react';
+import { MODAL } from '../../common/messages';
+
+import copy from '../../assets/icons/copy-white.png';
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 function EndpointDisplay() {
+  const [infoOpen, setInfoOpen] = useState(false);
+  const [infoMessage, setInfoMessage] = useState('');
+
+  // handle copy
+  const handleCopy = (endpoint) => {
+    navigator.clipboard
+      .writeText(endpoint)
+      .then(() => {
+        setInfoMessage(MODAL.COPY.ENDPOINT);
+        setInfoOpen(true);
+
+        // close after 10 seconds
+        setTimeout(() => setInfoOpen(false), 10000);
+      })
+      .catch((error) => {
+        console.error(`Failed copying endpoint: ${error.message}`);
+      });
+  };
+
   return (
     <div className="endpoint-display">
       {/* heading */}
@@ -38,14 +62,22 @@ function EndpointDisplay() {
           <div className="box-right">
             {/* request box */}
             <div className="request-box">
-              <div className="request-line">
+              <div className="request-content">
                 <h5>
-                  <span className="method">GET</span> {apiUrl}/api/v1/country
+                  <span className="method">GET</span> {apiUrl}/api/v1/public/country
                 </h5>
+                <img
+                  src={copy}
+                  alt="Copy"
+                  className="copy-icon"
+                  onClick={() => {
+                    handleCopy(`${apiUrl}/api/v1/public/country`);
+                  }}
+                />
               </div>
               <div className="curl-line">
                 <p>
-                  curl --location 'http://localhost:8000/api/v1/country' \
+                  curl --location 'http://localhost:8000/api/v1/public/country' \
                   <br />
                   --header 'x-api-key: YOUR_API_KEY_HERE' \
                 </p>
@@ -131,14 +163,22 @@ function EndpointDisplay() {
           <div className="box-right">
             {/* request box */}
             <div className="request-box">
-              <div className="request-line">
+              <div className="request-content">
                 <h5>
-                  <span className="method">GET</span> {apiUrl}/api/v1/country/:id
+                  <span className="method">GET</span> {apiUrl}/api/v1/public/country/:id
                 </h5>
+                <img
+                  src={copy}
+                  alt="Copy"
+                  className="copy-icon"
+                  onClick={() => {
+                    handleCopy(`${apiUrl}/api/v1/public/country/1`);
+                  }}
+                />
               </div>
               <div className="curl-line">
                 <p>
-                  curl --location 'http://localhost:8000/api/v1/country/1' \
+                  curl --location 'http://localhost:8000/api/v1/public/country/1' \
                   <br />
                   --header 'x-api-key: YOUR_API_KEY_HERE' \
                 </p>
@@ -187,6 +227,9 @@ function EndpointDisplay() {
 
         <hr />
       </div>
+
+      {/* info modal */}
+      <InfoModal isOpen={infoOpen} message={infoMessage} onConfrim={() => setInfoOpen(false)} />
     </div>
   );
 }

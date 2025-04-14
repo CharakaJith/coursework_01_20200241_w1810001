@@ -177,7 +177,7 @@ function KeyDisplay() {
     navigator.clipboard
       .writeText(key)
       .then(() => {
-        setInfoMessage(MODAL.COPY.MESSAGE);
+        setInfoMessage(MODAL.COPY.API_KEY);
         setInfoOpen(true);
 
         // close after 10 seconds

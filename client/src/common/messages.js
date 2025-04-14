@@ -28,7 +28,8 @@ module.exports = {
       MESSAGE: 'Are you sure you want to deactivate your account? This action may be irreversible.',
     },
     COPY: {
-      MESSAGE: 'API key copied to clipboard.',
+      API_KEY: 'API key copied to clipboard.',
+      ENDPOINT: 'Endpoint copied to clipboard.',
     },
   },
 };

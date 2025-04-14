@@ -114,6 +114,30 @@
   font-weight: bold;
 }
 
+.request-content {
+  background-color: #4f959d;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.copy-icon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  background-color: #4f1c51;
+  padding: 4px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease-out;
+}
+
+.copy-icon:hover {
+  background-color: #210f37;
+}
+
 /* response box */
 .response-box {
   width: 100%;
