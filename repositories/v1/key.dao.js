@@ -49,7 +49,6 @@ const keyDao = {
       return await models.ApiKey.findAll({
         where: {
           userId: userId,
-          status: API_KEY.STATUS.ACTIVE,
         },
       });
     } catch (error) {

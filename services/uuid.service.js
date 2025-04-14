@@ -9,11 +9,14 @@ const uuidService = {
     // get all keys
     const apiKeys = await keyDao.getAllKeysByUser(userId);
 
+    // filter out active keys
+    const activeKeys = apiKeys.filter((key) => key.status === API_KEY.STATUS.ACTIVE);
+
     // filter out expired keys
     const currentDate = new Date();
 
-    const validKeys = apiKeys.filter((key) => new Date(key.expiresAt) > currentDate);
-    const expiredKeys = apiKeys.filter((key) => new Date(key.expiresAt) <= currentDate);
+    const validKeys = activeKeys.filter((key) => new Date(key.expiresAt) > currentDate);
+    const expiredKeys = activeKeys.filter((key) => new Date(key.expiresAt) <= currentDate);
 
     // invalidate expired keys
     if (expiredKeys.length > 0) {

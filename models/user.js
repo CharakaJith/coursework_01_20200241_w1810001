@@ -8,12 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         as: 'apiKeys',
       });
-
-      // single user can make many requests
-      User.hasMany(models.ApiRequest, {
-        foreignKey: 'userId',
-        as: 'apiRequests',
-      });
     }
   }
   User.init(

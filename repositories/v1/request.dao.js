@@ -12,6 +12,18 @@ const requestDao = {
       throw new CustomError(DAO.FAILED.INSERT(ENTITY.REQUESTS, error), STATUS_CODE.SERVER_ERROR);
     }
   },
+
+  getAllByKeyId: async (keyId) => {
+    try {
+      return await models.ApiRequest.findAll({
+        where: {
+          keyId: keyId,
+        },
+      });
+    } catch (error) {
+      throw new CustomError(DAO.FAILED.GET.BY_KEY(ENTITY.REQUESTS, error), STATUS_CODE.SERVER_ERROR);
+    }
+  },
 };
 
 module.exports = requestDao;

@@ -7,6 +7,9 @@ const { API_KEY: API_KEY_MSG } = require('../../common/messages');
 const { API_KEY } = require('../../constants/app.constants');
 
 const validateAPIKey = async (req, res, next) => {
+  let apiKey;
+  const endpoint = req.originalUrl;
+
   try {
     // check for api key
     const key = req.header('x-api-key');
@@ -15,7 +18,7 @@ const validateAPIKey = async (req, res, next) => {
     }
 
     // get and validate api key
-    const apiKey = await keyDao.getKey(key);
+    apiKey = await keyDao.getKey(key);
     if (!apiKey) {
       throw new Error(API_KEY_MSG.INVALID);
     }
@@ -34,6 +37,14 @@ const validateAPIKey = async (req, res, next) => {
     next();
   } catch (error) {
     const statusCode = STATUS_CODE.UNAUTHORIZED;
+
+    // record request details
+    const apiRequest = {
+      keyId: apiKey.id,
+      endpoint: req.originalUrl,
+      statusCode: statusCode,
+    };
+    await requestDao.insert(apiRequest);
 
     res.status(statusCode).json({
       success: false,
