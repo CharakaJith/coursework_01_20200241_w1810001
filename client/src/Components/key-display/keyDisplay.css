@@ -176,3 +176,12 @@
   height: 25px;
   object-fit: contain;
 }
+
+/* no key message */
+.no-api-keys-msg {
+  margin-top: 45px;
+  color: white;
+  font-style: italic;
+  font-size: 16px;
+  align-self: flex-start;
+}

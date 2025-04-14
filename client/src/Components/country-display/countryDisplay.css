@@ -98,15 +98,14 @@
 }
 
 .country-table th {
-  background-color: #2c3e50;
-  color: #fff;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.95rem;
+  background-color: #134b70;
+  color: #ffffff;
   position: sticky;
   top: 0;
   z-index: 1;
-  border-bottom: 2px solid #ccc;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .country-table img {

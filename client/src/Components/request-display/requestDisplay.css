@@ -1,0 +1,79 @@
+/* request history display box */
+.request-display {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  width: calc(100vw - 250px - 60px);
+  height: calc(100vh - 55px - 60px);
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 250px;
+  border-radius: 15px;
+  padding: 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* request display header */
+.request-display-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.request-display h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* request history display table */
+.request-table-container {
+  flex: 1;
+  overflow-y: auto;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.request-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  min-width: 700px;
+}
+
+.request-table th,
+.request-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.request-table th {
+  background-color: #134b70;
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.request-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.request-table td.req-success,
+.request-table td.status-success {
+  color: green;
+}
+
+.request-table td.req-error,
+.request-table td.status-error {
+  color: red;
+}

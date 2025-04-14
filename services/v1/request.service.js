@@ -16,6 +16,7 @@ const requestService = {
       const requestData = requests.map((req) => {
         return {
           maskedKey: maskApiKey(key.apiKey),
+          keyStatus: key.status,
           endpoint: req.endpoint,
           status: req.statusCode,
           timeStamp: req.createdAt,

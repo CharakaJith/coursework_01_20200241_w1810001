@@ -234,7 +234,7 @@ function KeyDisplay() {
         </button>
 
         {/* api key display */}
-        {showFields && apiKeys.length > 0 && (
+        {showFields && apiKeys.length > 0 ? (
           <div className="generated-api-keys">
             <ul>
               {apiKeys.map((key, index) => (
@@ -259,6 +259,8 @@ function KeyDisplay() {
               ))}
             </ul>
           </div>
+        ) : (
+          showFields && <p className="no-api-keys-msg">No API keys to show.</p>
         )}
       </div>
 
