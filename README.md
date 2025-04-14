@@ -2,6 +2,8 @@
   <h2 ="center">CountryScope</h2>
 </div>
 
+![Home page](./client/src//assets/images/screenshot.png)
+
 ### This project is a secure API middleware service built for the Advanced Server-Side Web Development module (Coursework 01). It interfaces with RestCountries.com to fetch and filter country data including name, currency, capital, languages, and flag.
 
 ### The app features full user authentication, API key management, and secure data storage using SQLite with password hashing and session handling. It follows a polyglot architecture and is fully containerized with Docker for easy local deployment.
