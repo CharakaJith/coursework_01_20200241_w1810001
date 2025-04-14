@@ -12,21 +12,39 @@
   "host": "localhost:8000",
   "basePath": "/api/v1",
   "securityDefinitions": {
-    "BearerAuth": {
+    "JWT": {
       "type": "apiKey",
       "name": "Authorization",
       "in": "header",
-      "description": "Enter your json web token in the format \"{token}\""
+      "description": "Enter your JWT token in double quotes, e.g. \"your.token.here\""
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "x-api-key",
+      "in": "header",
+      "description": "Enter your API key for public access"
     }
   },
   "tags": [
     {
       "name": "User",
-      "description": "Endpoints related to user login and signup process"
+      "description": "Endpoints related to the user"
     },
     {
       "name": "Country",
       "description": "Endpoints related to fetching countries from RestCountries API"
+    },
+    {
+      "name": "Key",
+      "description": "Endpoints related to API key management"
+    },
+    {
+      "name": "Request",
+      "description": "Endpoints related to request log"
+    },
+    {
+      "name": "Public",
+      "description": "Endpoints being opend to public authenticated by API key"
     }
   ],
   "schemes": ["http"],
@@ -64,6 +82,105 @@
             "description": "User already registered in the system.",
             "schema": {
               "$ref": "#/definitions/UserSignUpConflictResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error occurred in the system.",
+            "schema": {
+              "$ref": "#/definitions/ServerErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["User"],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "description": "Updates existing user details.",
+        "parameters": [
+          {
+            "name": "user/",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UserUpdate"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "User details updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserUpdateSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "User failed to provide required details.",
+            "schema": {
+              "$ref": "#/definitions/UserUpdateBadResponse"
+            }
+          },
+          "401": {
+            "description": "Authentication token failed.",
+            "schema": {
+              "$ref": "#/definitions/AuthFailedResponse"
+            }
+          },
+          "403": {
+            "description": "User is not active.",
+            "schema": {
+              "$ref": "#/definitions/UserUpdateForbiddonResponse"
+            }
+          },
+          "404": {
+            "description": "User record is not available in the database.",
+            "schema": {
+              "$ref": "#/definitions/UserUpdateNotFoundResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error occurred in the system.",
+            "schema": {
+              "$ref": "#/definitions/ServerErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "description": "Deactivate user profile.",
+        "produces": ["application/json"],
+        "responses": {
+          "401": {
+            "description": "Authentication token failed.",
+            "schema": {
+              "$ref": "#/definitions/AuthFailedResponse"
+            }
+          },
+          "403": {
+            "description": "User is not active.",
+            "schema": {
+              "$ref": "#/definitions/UserDeleteForbiddonResponse"
+            }
+          },
+          "404": {
+            "description": "User record is not available in the database.",
+            "schema": {
+              "$ref": "#/definitions/UserDeleteNotFoundResponse"
+            }
+          },
+          "410": {
+            "description": "User profile deactivated successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserDeleteSuccessResponse"
             }
           },
           "500": {
@@ -135,15 +252,315 @@
         }
       }
     },
+    "/user/password": {
+      "put": {
+        "tags": ["User"],
+        "description": "Updates existing user's password.",
+        "parameters": [
+          {
+            "name": "user/",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UserPassword"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "User password updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserPasswordSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "User failed to provide required details.",
+            "schema": {
+              "$ref": "#/definitions/UserPasswordBadResponse"
+            }
+          },
+          "401": {
+            "description": "Authentication token failed or user's old password is incorrect.",
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AuthFailedResponse"
+                },
+                {
+                  "$ref": "#/definitions/UserPasswordUnauthResponse"
+                }
+              ]
+            }
+          },
+          "403": {
+            "description": "User is not active.",
+            "schema": {
+              "$ref": "#/definitions/UserPasswordForbiddonResponse"
+            }
+          },
+          "404": {
+            "description": "User record is not available in the database.",
+            "schema": {
+              "$ref": "#/definitions/UserPasswordNotFoundResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error occurred in the system.",
+            "schema": {
+              "$ref": "#/definitions/ServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+
     "/country/": {
       "get": {
         "tags": ["Country"],
         "security": [
           {
-            "BearerAuth": []
+            "JWT": []
           }
         ],
-        "description": "Fetch countries from the RestCountry API."
+        "description": "Fetch countries from the RestCountry API.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Fetched all countries.",
+            "schema": {
+              "$ref": "#/definitions/AllCountriesSuccessResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error occurred in the system.",
+            "schema": {
+              "$ref": "#/definitions/ServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/country/2": {
+      "get": {
+        "tags": ["Country"],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "description": "Fetch a country from the RestCountry API by country ID.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Fetched country by ID.",
+            "schema": {
+              "$ref": "#/definitions/CountryByIdSuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid type of ID.",
+            "schema": {
+              "$ref": "#/definitions/CountryByIdBadResponse"
+            }
+          },
+          "404": {
+            "description": "Country not found.",
+            "schema": {
+              "$ref": "#/definitions/CountryByIdNotFoundResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error occurred in the system.",
+            "schema": {
+              "$ref": "#/definitions/ServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+
+    "/key": {
+      "post": {
+        "tags": ["Key"],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "description": "Create a new API key for the user.",
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "API key successfully created.",
+            "schema": {
+              "$ref": "#/definitions/ApiKeySuccessResponse"
+            }
+          },
+          "401": {
+            "description": "Authentication token failed.",
+            "schema": {
+              "$ref": "#/definitions/AuthFailedResponse"
+            }
+          },
+          "422": {
+            "description": "API key limit reached.",
+            "schema": {
+              "$ref": "#/definitions/ApiKeyUnprocessableResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error occurred in the system.",
+            "schema": {
+              "$ref": "#/definitions/ServerErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Key"],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "description": "Get all API keys for the user.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "API keys successfully fetched.",
+            "schema": {
+              "$ref": "#/definitions/ApiKeyGetSuccessResponse"
+            }
+          },
+          "401": {
+            "description": "Authentication token failed.",
+            "schema": {
+              "$ref": "#/definitions/AuthFailedResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error occurred in the system.",
+            "schema": {
+              "$ref": "#/definitions/ServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/key/1": {
+      "delete": {
+        "tags": ["Key"],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "description": "Revoke an API key.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "API key revoked successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApiKeyRevokeSuccessResponse"
+            }
+          },
+          "401": {
+            "description": "Authentication token failed.",
+            "schema": {
+              "$ref": "#/definitions/AuthFailedResponse"
+            }
+          },
+          "400": {
+            "description": "API key is not active.",
+            "schema": {
+              "$ref": "#/definitions/ApiKeyRevokeBadResponse"
+            }
+          },
+          "403": {
+            "description": "API key does not belong to user.",
+            "schema": {
+              "$ref": "#/definitions/ApiKeyRevokeForbiddonResponse"
+            }
+          },
+          "404": {
+            "description": "Invalid API key ID.",
+            "schema": {
+              "$ref": "#/definitions/ApiKeyRevokeNotFoundResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error occurred in the system.",
+            "schema": {
+              "$ref": "#/definitions/ServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+
+    "/request": {
+      "get": {
+        "tags": ["Request"],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "description": "Get all API request history for the user.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Request log fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/RequestLogSuccessResponse"
+            }
+          },
+          "401": {
+            "description": "Authentication token failed.",
+            "schema": {
+              "$ref": "#/definitions/AuthFailedResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error occurred in the system.",
+            "schema": {
+              "$ref": "#/definitions/ServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+
+    "/public/country": {
+      "get": {
+        "tags": ["Public"],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Fetch countries from the public API.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Fetched all countries.",
+            "schema": {
+              "$ref": "#/definitions/AllCountriesSuccessResponse"
+            }
+          },
+          "401": {
+            "description": "API key is not valid or inactive.",
+            "schema": {
+              "$ref": "#/definitions/PublicCountriesUnauthResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected server error occurred in the system.",
+            "schema": {
+              "$ref": "#/definitions/ServerErrorResponse"
+            }
+          }
+        }
       }
     }
   },
@@ -251,35 +668,35 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "field": {
+                  "fields": {
                     "type": "string",
                     "example": "firstName"
                   },
                   "message": {
                     "type": "string",
-                    "example": "Field firstName is empty!"
+                    "example": "Field 'firstName' is empty!"
                   }
                 },
                 "example": [
                   {
-                    "field": "firstName",
-                    "message": "Field firstName is empty!"
+                    "fields": "firstName",
+                    "message": "Field 'firstName' is empty!"
                   },
                   {
-                    "field": "lastName",
-                    "message": "Field lastName is empty!"
+                    "fields": "lastName",
+                    "message": "Field 'lastName' is empty!"
                   },
                   {
-                    "field": "email",
-                    "message": "Field email is empty!"
+                    "fields": "email",
+                    "message": "Field 'email' is empty!"
                   },
                   {
-                    "field": "email",
-                    "message": "Invalid email format!"
+                    "fields": "email",
+                    "message": "Invalid 'email' format!"
                   },
                   {
-                    "field": "password",
-                    "message": "Field password is empty!"
+                    "fields": "password",
+                    "message": "Field 'password' is empty!"
                   }
                 ]
               }
@@ -308,6 +725,259 @@
                 "message": {
                   "type": "string",
                   "example": "User already registered!"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "UserUpdate": {
+      "type": "object",
+      "required": ["firstName", "lastName"],
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "example": "John",
+          "description": "First name of the user."
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Doe",
+          "description": "Second name of the user."
+        }
+      }
+    },
+    "UserUpdateSuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "true"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "200"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "isActive": {
+                      "type": "boolean",
+                      "example": "true"
+                    },
+                    "id": {
+                      "type": "number",
+                      "example": "1"
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "John"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Doe"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "john@example.com"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2025-03-01T03:21:47.716Z"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2025-03-01T03:21:47.716Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "UserUpdateBadResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "400"
+            },
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "fields": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "example": [
+                  {
+                    "fields": "firstName",
+                    "message": "The 'firstName' field is required."
+                  },
+                  {
+                    "fields": "lastName",
+                    "message": "The 'lastName' field is required."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "UserUpdateForbiddonResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "403"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User account is inactive."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "UserUpdateNotFoundResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "404"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User not found."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "UserDeleteSuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "true"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "410"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User profile has been permanently deleted."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "UserDeleteNotFoundResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "404"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User not found."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "UserDeleteForbiddonResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "403"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User account is inactive."
                 }
               }
             }
@@ -409,7 +1079,7 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "field": {
+                  "fields": {
                     "type": "string"
                   },
                   "message": {
@@ -418,16 +1088,16 @@
                 },
                 "example": [
                   {
-                    "field": "email",
-                    "message": "Field email is empty!"
+                    "fields": "email",
+                    "message": "The 'email' field is required."
                   },
                   {
-                    "field": "email",
-                    "message": "Invalid email format!"
+                    "fields": "email",
+                    "message": "Invalid format for 'email'."
                   },
                   {
-                    "field": "password",
-                    "message": "Field password is empty!"
+                    "fields": "password",
+                    "message": "The 'password' field is required."
                   }
                 ]
               }
@@ -455,7 +1125,7 @@
               "properties": {
                 "message": {
                   "type": "string",
-                  "example": "Invalid user credentials!"
+                  "example": "Invalid user credentials."
                 }
               }
             }
@@ -482,7 +1152,778 @@
               "properties": {
                 "message": {
                   "type": "string",
-                  "example": "User is not active!"
+                  "example": "User account is inactive."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "UserPassword": {
+      "type": "object",
+      "required": ["oldPassword", "newPassword"],
+      "properties": {
+        "oldPassword": {
+          "type": "string",
+          "example": "randomPwd123",
+          "description": "Current password of the user."
+        },
+        "newPassword": {
+          "type": "string",
+          "example": "updatedPwd098",
+          "description": "New password of the user."
+        }
+      }
+    },
+    "UserPasswordSuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "true"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "200"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Password updated successfully."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "UserPasswordBadResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "400"
+            },
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "fields": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "example": [
+                  {
+                    "fields": "oldPassword",
+                    "message": "The 'oldPassword' field is required."
+                  },
+                  {
+                    "fields": "newPassword",
+                    "message": "The 'newPassword' field is required."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "UserPasswordForbiddonResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "403"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User account is inactive."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "UserPasswordNotFoundResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "404"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User not found."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "UserPasswordUnauthResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "401"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Current password is incorrect."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "AllCountriesSuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "true"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "200"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "countries": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "officialName": {
+                        "type": "string",
+                        "example": "American Samoa"
+                      },
+                      "commonName": {
+                        "type": "string",
+                        "example": "American Samoa"
+                      },
+                      "capital": {
+                        "type": "string",
+                        "example": "Pago Pago"
+                      },
+                      "languages": {
+                        "type": "object",
+                        "properties": {
+                          "eng": {
+                            "type": "string",
+                            "example": "English"
+                          },
+                          "smo": {
+                            "type": "string",
+                            "example": "Samoan"
+                          }
+                        }
+                      },
+                      "flagUrl": {
+                        "type": "string",
+                        "example": "https://flagcdn.com/as.svg"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2025-04-14T11:06:24.592Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2025-04-14T11:06:24.592Z"
+                      },
+                      "currency": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number",
+                            "example": 16
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "United States dollar"
+                          },
+                          "code": {
+                            "type": "string",
+                            "example": "USD"
+                          },
+                          "symbol": {
+                            "type": "string",
+                            "example": "$"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "example": "2025-04-14T11:06:24.592Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "example": "2025-04-14T11:06:24.592Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "CountryByIdSuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "true"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "200"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 2
+                    },
+                    "officialName": {
+                      "type": "string",
+                      "example": "Grenada"
+                    },
+                    "commonName": {
+                      "type": "string",
+                      "example": "Grenada"
+                    },
+                    "capital": {
+                      "type": "string",
+                      "example": "St. George's"
+                    },
+                    "languages": {
+                      "type": "object",
+                      "properties": {
+                        "eng": {
+                          "type": "string",
+                          "example": "English"
+                        }
+                      }
+                    },
+                    "flagUrl": {
+                      "type": "string",
+                      "example": "https://flagcdn.com/gd.svg"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2025-04-14T11:06:24.592Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2025-04-14T11:06:24.592Z"
+                    },
+                    "currency": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "example": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Eastern Caribbean dollar"
+                        },
+                        "code": {
+                          "type": "string",
+                          "example": "XCD"
+                        },
+                        "symbol": {
+                          "type": "string",
+                          "example": "$"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2025-04-14T11:06:24.592Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "example": "2025-04-14T11:06:24.592Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "CountryByIdBadResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "400"
+            },
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "fields": {
+                    "type": "string",
+                    "example": "id"
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Invalid format for 'id'."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "CountryByIdNotFoundResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "404"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Country not found."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "ApiKeySuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "true"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "201"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "apiKey": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "userId": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "apiKey": {
+                      "type": "string",
+                      "example": "0a650ff6-c987-41c4-848e-7c02c9da12e5"
+                    },
+                    "expiresAt": {
+                      "type": "string",
+                      "example": "2025-05-14T17:16:58.184Z"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "ACTIVE"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2025-04-14T17:16:58.187Z"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2025-04-14T17:16:58.187Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ApiKeyUnprocessableResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "422"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Maximum number of API keys reached."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "ApiKeyGetSuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "true"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "200"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "apiKeys": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "userId": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "apiKey": {
+                        "type": "string",
+                        "example": "0a650ff6-c987-41c4-848e-7c02c9da12e5"
+                      },
+                      "expiresAt": {
+                        "type": "string",
+                        "example": "2025-05-14T17:16:58.184Z"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "ACTIVE"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2025-04-14T17:16:58.187Z"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2025-04-14T17:16:58.187Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "ApiKeyRevokeSuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "true"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "200"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "API key revoked successfully."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ApiKeyRevokeBadResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "400"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Unable to revoke this API key."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ApiKeyRevokeForbiddonResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "403"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Access denied."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ApiKeyRevokeNotFoundResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "404"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Invalid API key ID."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "RequestLogSuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "true"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "200"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "log": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "maskedKey": {
+                        "type": "string",
+                        "example": "********-****-****-****-********12e5"
+                      },
+                      "keyStatus": {
+                        "type": "string",
+                        "example": "ACTIVE"
+                      },
+                      "endpoint": {
+                        "type": "string",
+                        "example": "/api/v1/public/country"
+                      },
+                      "status": {
+                        "type": "number",
+                        "example": 200
+                      },
+                      "timeStamp": {
+                        "type": "string",
+                        "example": "2025-04-14T18:01:11.756Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "PublicCountriesUnauthResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "500"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "examples": {
+                    "apiKeyMissing": {
+                      "summary": "API key is missing from request header.",
+                      "value": "API key missing in x-api-key header."
+                    },
+                    "apiKeyInvalid": {
+                      "summary": "API key does not exists.",
+                      "value": "API key is invalid or does not exist."
+                    },
+                    "apiKeyInactive": {
+                      "summary": "API key is not active.",
+                      "value": "API key is not active. It may be expired, revoked, or blocked."
+                    }
+                  }
                 }
               }
             }
@@ -511,6 +1952,33 @@
                 "message": {
                   "type": "string",
                   "example": "Server error message!"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "AuthFailedResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": "false"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": "401"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Authentication failed."
                 }
               }
             }

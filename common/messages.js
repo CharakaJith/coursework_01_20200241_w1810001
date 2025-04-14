@@ -72,9 +72,9 @@ module.exports = {
 
   // api key service messages
   API_KEY: {
-    MISSING: 'API key missing in x-api-key header',
-    INVALID: 'API key is invalid or does not exist',
-    NOT_ACTIVE: 'API key is not active. It may be expired, revoked, or blocked',
+    MISSING: 'API key missing in x-api-key header.',
+    INVALID: 'API key is invalid or does not exist.',
+    NOT_ACTIVE: 'API key is not active. It may be expired, revoked, or blocked.',
   },
 
   // uuid service messages

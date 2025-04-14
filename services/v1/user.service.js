@@ -144,7 +144,7 @@ const userService = {
     // get and validate user
     const user = await userDao.getById(id);
     if (!user) {
-      throw new CustomError(RESPONSE.USER.NOT_FOUND);
+      throw new CustomError(RESPONSE.USER.NOT_FOUND, STATUS_CODE.NOT_FOUND);
     }
     if (user.id !== id) {
       throw new CustomError(JWT.AUTH.FORBIDDEN, STATUS_CODE.FORBIDDON);
@@ -201,7 +201,7 @@ const userService = {
     // get and validate user
     const user = await userDao.getById(id);
     if (!user) {
-      throw new CustomError(RESPONSE.USER.NOT_FOUND);
+      throw new CustomError(RESPONSE.USER.NOT_FOUND, STATUS_CODE.NOT_FOUND);
     }
     if (user.id !== id) {
       throw new CustomError(JWT.AUTH.FORBIDDEN, STATUS_CODE.FORBIDDON);
@@ -242,7 +242,7 @@ const userService = {
     // get and validate user
     const user = await userDao.getById(userId);
     if (!user) {
-      throw new CustomError(RESPONSE.USER.NOT_FOUND);
+      throw new CustomError(RESPONSE.USER.NOT_FOUND, STATUS_CODE.NOT_FOUND);
     }
     if (user.id !== userId) {
       throw new CustomError(JWT.AUTH.FORBIDDEN, STATUS_CODE.FORBIDDON);

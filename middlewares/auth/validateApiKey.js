@@ -29,7 +29,7 @@ const validateAPIKey = async (req, res, next) => {
     // record request details
     const apiRequest = {
       keyId: apiKey.id,
-      endpoint: req.originalUrl,
+      endpoint: endpoint,
       statusCode: STATUS_CODE.OK,
     };
     await requestDao.insert(apiRequest);
@@ -40,8 +40,8 @@ const validateAPIKey = async (req, res, next) => {
 
     // record request details
     const apiRequest = {
-      keyId: apiKey.id,
-      endpoint: req.originalUrl,
+      keyId: apiKey?.id || 'null',
+      endpoint: endpoint,
       statusCode: statusCode,
     };
     await requestDao.insert(apiRequest);
