@@ -255,6 +255,11 @@
     "/user/password": {
       "put": {
         "tags": ["User"],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "description": "Updates existing user's password.",
         "parameters": [
           {
