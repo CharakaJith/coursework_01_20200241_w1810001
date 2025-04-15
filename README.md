@@ -154,7 +154,8 @@ The following assumptions were made during the development of this project:
 ## Documentations
 
 - [Postman API documentation](https://documenter.getpostman.com/view/28014836/2sB2ca7KxT)
-- [System architecture diagram]()
+- [System architecture diagram](https://lucid.app/lucidchart/2a483b63-3440-4489-8897-0be2bec5e6c0/edit?viewport_loc=-692%2C75%2C4037%2C1876%2C0_0&invitationId=inv_a37d0cd7-3207-4b11-aff4-4d38cec92698)
+- [Entity relationship diagram](https://lucid.app/lucidchart/7f8a2968-8a84-4d4a-bd8a-6f496e6089f5/edit?view_items=SEO-UoEFLCDi&invitationId=inv_c9636f5d-29ab-4624-bd44-f04850d3bada)
 
 ## Contact
 
