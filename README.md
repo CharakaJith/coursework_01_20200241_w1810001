@@ -81,8 +81,13 @@ The following assumptions were made during the development of this project:
 
 ### 2. Database
 
-- SQLite is used for local development and testing.
+- **SQLite** is used for local development and testing.
 - The database schema is designed in **Third Normal Form (3NF)** to reduce redundancy and ensure data integrity.
+- **Sequelize** is used as the ORM for interacting with the SQLite database.
+  - **Sequelize** provides a straightforward API for working with relational databases and allows for easy migrations and model definition.
+  - It abstracts the complexity of SQL queries, making it easier to manage data and perform CRUD operations.
+  - Sequelize supports multiple dialects (including SQLite, PostgreSQL, MySQL), providing flexibility for future changes to the database engine.
+  - It also supports relationships between tables (one-to-many, many-to-many), making it suitable for complex data models.
 - A `user` table is used to store user credentials and related information.
 - `key` and `request` tables are used for API key generation, storage, and request tracking for rate limiting or auditing purposes.
 - `country` and `currency` tables are used to store and manage session-related data where applicable.
@@ -92,9 +97,11 @@ The following assumptions were made during the development of this project:
 
 - Passwords are hashed securely (e.g., using bcrypt) before being stored in the database.
 - User authentication is handled using **JSON Web Tokens (JWT)**, which are issued upon successful login and validated on protected routes.
-- Each user can generate up to two unique **API keys**, which are used to authenticate access to public or shared endpoints.
+- **API keys** are used to secure publicly exposed endpoints. Specifically, the `GET /countries` and `GET /countries/:id` endpoints require a valid API key.
+- Each user can generate up to **two API keys** at a time.
+- API keys are valid for **30 days** from the time of creation and can be **revoked by the user at any time**.
 - API keys are stored and transmitted securely.
-- Both API keys and tokens have predefined expiration times to enhance security.
+- Both API keys and JWT tokens have predefined expiration times to enhance security.
 
 ### 4. External APIs
 
@@ -116,6 +123,33 @@ The following assumptions were made during the development of this project:
 - All dependencies are declared in the `package.json` file.
 - ESLint is configured using a `.eslintrc.mjs` file.
 - The codebase uses modern JavaScript (ES6+).
+
+### 8. Logging
+
+- The application uses **Winston** for logging, with log files rotating daily.
+- Logs include details about HTTP requests, response status, and error messages.
+- The log format includes timestamps, log levels, and structured JSON data.
+- Error stack traces are logged only in development mode.
+- Sensitive information is not logged.
+- Logs are kept for **14 days** before being automatically deleted.
+
+### 9. Error Handling
+
+- The application uses a custom error handler to manage errors and send appropriate responses.
+- Errors are logged using **Winston** with the log type depending on the error severity (`ERROR`, `FAIL`).
+- The error handler responds with an appropriate HTTP status code and error message.
+- In development mode, the full stack trace is included in the response for debugging purposes.
+- Sensitive error details (like passwords or tokens) are not included in the logs or responses.
+
+### 10. Architecture
+
+- The application follows a layered architecture with the following structure:
+  - **Client**: The front-end or external application that interacts with the API.
+  - **Route**: Defines the HTTP routes and endpoints exposed to the client.
+  - **Controller**: Handles incoming requests and delegates business logic to services.
+  - **Service**: Contains the core business logic and operations.
+  - **DAO (Data Access Object)**: Provides an abstraction layer for interacting with the database.
+  - **Database**: The SQLite database is used for storing and managing data.
 
 ## Documentations
 
