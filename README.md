@@ -33,6 +33,10 @@
    ```bash
    git clone https://github.com/CharakaJith/coursework_01_20200241_w1810001.git
    ```
+2. Step into the project
+   ```bash
+   cd coursework_01_20200241_w1810001
+   ```
 
 ### Start the project using Docker
 
@@ -43,6 +47,10 @@
 2. Run the container using image
    ```bash
    docker-compose up
+   ```
+3. Stop running container
+   ```bash
+   docker-compose down
    ```
 
 ### Start the project using terminal
