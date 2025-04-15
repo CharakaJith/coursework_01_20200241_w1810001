@@ -169,7 +169,7 @@ The following assumptions were made during the development of this project:
 
 ## Contact
 
-Email: [charaka.info@gmail.com](mailto:charaka.info@gmail.com) | LinkedIn: [Charaka Jith Gunasinghe](https://www.linkedin.com/in/charaka-gunasinghe-6742861b9/)
+Email: [charaka.info@gmail.com](mailto:charaka.info@gmail.com) | LinkedIn: [Charaka Jith Gunasinghe](https://www.linkedin.com/in/charaka-gunasinghe/)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
