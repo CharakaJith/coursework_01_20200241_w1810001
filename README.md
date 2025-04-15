@@ -33,19 +33,29 @@
    ```bash
    git clone https://github.com/CharakaJith/coursework_01_20200241_w1810001.git
    ```
-2. Set up the project
-   i. Install NPM packages
+
+### Start the project using Docker
+
+1. Build the docker image
+   ```bash
+   docker-compose build
+   ```
+2. Run the container using image
+   ```bash
+   docker-compose up
+   ```
+
+### Start the project using terminal
+
+1. Install NPM packages
    ```bash
    npm run install:all
    ```
-   ii. Create database tables
+2. Create database tables
    ```bash
    npm run migrate:up
    ```
-
-### Start the project
-
-1. Start the server and client
+3. Start the server and client
    ```bash
    npm run start
    ```
