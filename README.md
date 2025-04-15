@@ -69,6 +69,54 @@
    npm run migrate:down:all
    ```
 
+## Assumptions
+
+The following assumptions were made during the development of this project:
+
+### 1. Environment Configuration
+
+- The application runs in a Node.js environment (version 20.18.1).
+- Environment variables are provided in a `.env` file.
+- The app uses `NODE_ENV=development` or `NODE_ENV=production`.
+
+### 2. Database
+
+- SQLite is used for local development and testing.
+- The database schema is designed in **Third Normal Form (3NF)** to reduce redundancy and ensure data integrity.
+- A `user` table is used to store user credentials and related information.
+- `key` and `request` tables are used for API key generation, storage, and request tracking for rate limiting or auditing purposes.
+- `country` and `currency` tables are used to store and manage session-related data where applicable.
+- The database schema remains consistent across environments unless explicitly modified.
+
+### 3. Authentication & Security
+
+- Passwords are hashed securely (e.g., using bcrypt) before being stored in the database.
+- User authentication is handled using **JSON Web Tokens (JWT)**, which are issued upon successful login and validated on protected routes.
+- Each user can generate up to two unique **API keys**, which are used to authenticate access to public or shared endpoints.
+- API keys are stored and transmitted securely.
+- Both API keys and tokens have predefined expiration times to enhance security.
+
+### 4. External APIs
+
+- The RestCountries API is assumed to be available and stable.
+- The structure of the API response is expected to remain consistent.
+
+### 5. User Roles & Access
+
+- Only authenticated users can access protected endpoints.
+- No admin or multi-tier access roles are implemented unless explicitly stated.
+
+### 6. Request & Response Handling
+
+- Client requests are expected to be well-formed and follow the defined API contract.
+- Errors are handled using appropriate HTTP status codes and clear response messages.
+
+### 7. Dependencies & Tooling
+
+- All dependencies are declared in the `package.json` file.
+- ESLint is configured using a `.eslintrc.mjs` file.
+- The codebase uses modern JavaScript (ES6+).
+
 ## Documentations
 
 - [Postman API documentation](https://documenter.getpostman.com/view/28014836/2sB2ca7KxT)
